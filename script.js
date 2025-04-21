@@ -191,15 +191,15 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Ad click handling
-    document.querySelectorAll('.fake-ad').forEach(ad => {
-        ad.addEventListener('click', function() {
-            const adData = {
-                id: this.dataset.adId,
-                position: this.closest('.sidebar-ad') ? 'sidebar' : 'banner',
+    document.querySelectorAll('.promo-box').forEach(promo => {
+        promo.addEventListener('click', function() {
+            const promoData = {
+                id: this.dataset.promoId,
+                position: this.closest('.sidebar-promo') ? 'sidebar' : 'featured',
                 type: this.querySelector('img').alt
             };
             
-            ZeroFirstTracker.trackAdClick(adData);
+            ZeroFirstTracker.trackAdClick(promoData);
         });
     });
     

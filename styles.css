@@ -330,13 +330,13 @@ nav {
 }
 
 /* Ads Styles */
-.ad-container {
+.promo-container {
     margin: 20px auto;
     max-width: 1200px;
     text-align: center;
 }
 
-.sidebar-ad {
+.sidebar-promo {
     position: fixed;
     right: 20px;
     top: 50%;
@@ -345,13 +345,13 @@ nav {
     z-index: 100;
 }
 
-.banner-ad {
-    padding: 20px 0;  /* Pequeno para não criar espaço interno grande */
-    margin-top: 250px; /* Este valor que vai posicionar o banner mais abaixo */
+.featured-promo {
+    padding: 20px 0;
+    margin-top: 250px;
     margin-bottom: 30px;
 }
 
-.fake-ad {
+.promo-box {
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     padding: 10px;

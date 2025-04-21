@@ -769,7 +769,7 @@ footer {
 
 /* Responsive Adjustments */
 @media (max-width: 1400px) {
-    .sidebar-ad {
+    .sidebar-ad, .sidebar-promo {
         display: none;
     }
 }
@@ -889,4 +889,27 @@ footer {
 .category-side-story::before,
 .category-side-story::after {
     display: none;
+}
+
+/* Ads Styles */
+.sidebar-ad, .sidebar-promo {
+    position: fixed !important;
+    right: 20px !important;
+    left: auto !important; 
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 300px !important;
+    z-index: 100 !important;
+}
+
+.banner-ad, .featured-promo {
+    position: relative !important;
+    margin: 30px auto !important;
+    width: 100% !important;
+    max-width: 1200px !important;
+    text-align: center !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    padding: 20px 0 !important;
 }

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ZeroFirst Event Viewer</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      padding: 40px;
+      background-color: #f4f4f4;
+      font-family: sans-serif;
+    }
+
+    h1 {
+      color: #1d3557;
+    }
+
+    select, button {
+      padding: 8px;
+      margin-right: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background-color: #fff;
+    }
+
+    th, td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      font-size: 0.95rem;
+      text-align: left;
+    }
+
+    th {
+      background-color: #1d3557;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+  </style>
+</head>
+<body>
+  <h1>ZeroFirst Events</h1>
+
+  <label for="eventFilter">Filter by Event Type:</label>
+  <select id="eventFilter">
+    <option value="all">All Events</option>
+  </select>
+
+  <button onclick="downloadEvents()">Download JSON</button>
+
+  <table id="eventsTable">
+    <thead>
+      <tr>
+        <th>Event</th>
+        <th>Timestamp</th>
+        <th>User</th>
+        <th>Details</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    const rawEvents = JSON.parse(localStorage.getItem('zeroFirstEvents') || '[]');
+    const tableBody = document.querySelector('#eventsTable tbody');
+    const filterSelect = document.getElementById('eventFilter');
+
+    // Get unique event types
+    const eventTypes = [...new Set(rawEvents.map(e => e.eventName))];
+    eventTypes.forEach(type => {
+      const option = document.createElement('option');
+      option.value = type;
+      option.textContent = type;
+      filterSelect.appendChild(option);
+    });
+
+    // Render table
+    function renderTable(filter = 'all') {
+      tableBody.innerHTML = '';
+
+      const filtered = filter === 'all'
+        ? rawEvents
+        : rawEvents.filter(e => e.eventName === filter);
+
+      filtered.forEach(({ eventName, eventData }) => {
+        const tr = document.createElement('tr');
+
+        const user = eventData.userName || eventData.userId || '-';
+
+        tr.innerHTML = `
+          <td>${eventName}</td>
+          <td>${eventData.timestamp || '-'}</td>
+          <td>${user}</td>
+          <td><pre style="white-space:pre-wrap;">${JSON.stringify(eventData, null, 2)}</pre></td>
+        `;
+
+        tableBody.appendChild(tr);
+      });
+    }
+
+    // Filter change
+    filterSelect.addEventListener('change', () => {
+      renderTable(filterSelect.value);
+    });
+
+    // Download JSON
+    function downloadEvents() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(rawEvents, null, 2));
+      const a = document.createElement('a');
+      a.href = dataStr;
+      a.download = 'zerofirst-events.json';
+      a.click();
+    }
+
+    // Init
+    renderTable();
+  </script>
+</body>
+</html>

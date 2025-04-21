@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Football News - SportsDaily</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo">
+                <span class="logo-sports">Sports</span><span class="logo-daily">Daily</span>
+            </a>
+            <div class="auth-buttons" id="authButtons">
+                <button class="btn btn-outline" id="loginBtn">Login</button>
+                <button class="btn btn-primary" id="signupBtn">Sign Up</button>
+            </div>
+            <div class="user-profile" id="userProfile" style="display: none;">
+                <span id="userName"></span>
+                <button class="btn btn-outline" id="logoutBtn">Logout</button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Navigation -->
+    <nav>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="category-football.html" class="active" data-category="Football">Football</a></li>
+            <li><a href="category-basketball.html" data-category="Basketball">Basketball</a></li>
+            <li><a href="category-tennis.html" data-category="Tennis">Tennis</a></li>
+            <li><a href="category-cricket.html" data-category="Cricket">Cricket</a></li>
+            <li><a href="category-golf.html" data-category="Golf">Golf</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Main Content -->
+    <main>
+        <div class="category-header">
+            <h1>Football News</h1>
+            <p>All the latest football news, match reports, and analysis</p>
+        </div>
+        
+        <!-- Featured Football Stories -->
+        <section class="category-featured">
+            <div class="featured-grid">
+                <div class="category-main-story">
+                    <img src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=2070" alt="Liverpool celebration">
+                    <div class="story-content">
+                        <h2>Liverpool Secures Last-Minute Victory with Stunning Header</h2>
+                        <p>A dramatic injury-time goal sealed the win in what many are calling the match of the season.</p>
+                        <div class="story-meta">
+                            <span>By James Miller</span>
+                            <span>April 18, 2025</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="category-side-stories">
+                    <div class="category-side-story">
+                        <img src="https://images.unsplash.com/photo-1459865264687-595d652de67e?q=80&w=2070" alt="Barcelona stadium">
+                        <div class="story-content">
+                            <h3>Barcelona Announces New Head Coach</h3>
+                            <div class="story-meta">
+                                <span>By Carlos Mendez</span>
+                                <span>April 14, 2025</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="category-side-story">
+                        <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=2070" alt="Premier League match">
+                        <div class="story-content">
+                            <h3>Manchester United Stuns City in Derby Win</h3>
+                            <div class="story-meta">
+                                <span>By David Roberts</span>
+                                <span>April 17, 2025</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Latest Football Articles -->
+        <section class="category-articles">
+            <h2 class="section-header">Latest Football Articles</h2>
+            <div class="section-header-underline"></div>
+            
+            <div class="articles-grid">
+                <article class="article-card" data-article-id="10">
+                    <img src="https://images.unsplash.com/photo-1489944440615-453fc2b6a9a9?q=80&w=2070" alt="Football tactics board">
+                    <div class="article-content">
+                        <h3>Tactical Analysis: How Modern Football is Evolving</h3>
+                        <p>An in-depth look at the tactical innovations shaping today's game.</p>
+                        <div class="article-meta">
+                            <span>By Thomas Hughes</span>
+                            <span>April 16, 2025</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="article-card" data-article-id="11">
+                    <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=2070" alt="Champions League">
+                    <div class="article-content">
+                        <h3>Champions League: Road to the Final</h3>
+                        <p>Which teams are best positioned to win Europe's premier competition?</p>
+                        <div class="article-meta">
+                            <span>By Elena Vasquez</span>
+                            <span>April 15, 2025</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="article-card" data-article-id="12">
+                    <img src="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?q=80&w=2070" alt="Football training">
+                    <div class="article-content">
+                        <h3>The Future of Football Training: Technology Takes Over</h3>
+                        <p>How AI and data analytics are revolutionizing player development.</p>
+                        <div class="article-meta">
+                            <span>By Mark Thompson</span>
+                            <span>April 14, 2025</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="article-card" data-article-id="13">
+                    <img src="https://images.unsplash.com/photo-1553778263-73a83bab9b0c?q=80&w=2070" alt="Youth academy">
+                    <div class="article-content">
+                        <h3>Rising Stars: Top Youth Academy Prospects</h3>
+                        <p>Meet the young talents expected to make waves in world football.</p>
+                        <div class="article-meta">
+                            <span>By Sophie Laurent</span>
+                            <span>April 13, 2025</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="article-card" data-article-id="14">
+                    <img src="https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?q=80&w=2070" alt="Transfer news">
+                    <div class="article-content">
+                        <h3>Transfer Watch: Latest Rumors and Confirmed Deals</h3>
+                        <p>All the latest transfer news from Europe's top leagues.</p>
+                        <div class="article-meta">
+                            <span>By Alex Johnson</span>
+                            <span>April 12, 2025</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="article-card" data-article-id="15">
+                    <img src="https://images.unsplash.com/photo-1551958219-acbc608c6377?q=80&w=2070" alt="Women's football">
+                    <div class="article-content">
+                        <h3>Women's Football Growth Continues to Accelerate</h3>
+                        <p>Record attendance and investment mark a new era for women's game.</p>
+                        <div class="article-meta">
+                            <span>By Rachel Green</span>
+                            <span>April 11, 2025</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Banner Ad -->
+    <div class="ad-container banner-ad">
+        <div class="fake-ad" data-ad-id="category-banner-1">
+            <img src="https://placehold.co/728x90?text=Watch+Premier+League+Live+-+Subscribe+Now" alt="Sports Streaming Ad">
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>About SportsDaily</h3>
+                <ul class="footer-links">
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Our Team</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Categories</h3>
+                <ul class="footer-links">
+                    <li><a href="category-football.html">Football</a></li>
+                    <li><a href="category-basketball.html">Basketball</a></li>
+                    <li><a href="category-tennis.html">Tennis</a></li>
+                    <li><a href="category-cricket.html">Cricket</a></li>
+                    <li><a href="category-golf.html">Golf</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">YouTube</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Cookie Policy</a></li>
+                    <li><a href="#">GDPR</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 SportsDaily. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- Modals -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Login</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+        </div>
+    </div>
+    
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Sign Up</h2>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="signupName">Full Name</label>
+                    <input type="text" id="signupName" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupAge">Age</label>
+                    <input type="number" id="signupAge" required min="13" max="120">
+                </div>
+                <div class="form-group">
+                    <label for="signupGender">Gender</label>
+                    <select id="signupGender" required>
+                        <option value="">Select gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                        <option value="prefer_not_to_say">Prefer not to say</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Sign Up</button>
+            </form>
+        </div>
+    </div>
+    
+    <script src="tracking.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Track category page view
+        document.addEventListener('DOMContentLoaded', function() {
+            ZeroFirstTracker.trackCategoryView('Football');
+        });
+    </script>
+</body>
+</html>

@@ -39,12 +39,14 @@
     <!-- Main Content - Home Page -->
     <main>
         <!-- Sidebar Ad -->
-        <div class="promo-container sidebar-promo">
-            <div class="promo-box" data-promo-id="sidebar-1">
-                <img src="https://placehold.co/300x600?text=Sportswear+Sale" alt="Sports Advertisement">
-                <p>Up to 50% off!</p>
-            </div>
+        <div class="promo-container sidebar-promo" id="sidebarAd">
+          <div class="promo-box" data-promo-id="sidebar-1">
+            <button class="close-ad" onclick="document.getElementById('sidebarAd').style.display = 'none';">✕</button>
+            <img src="https://placehold.co/300x600?text=Sportswear+Sale" alt="Sports Advertisement">
+            <p>Up to 50% off!</p>
+          </div>
         </div>
+
         
         <!-- Featured Stories Section -->
         <section>

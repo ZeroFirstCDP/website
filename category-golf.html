@@ -6,25 +6,98 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>... <!-- mesmo header do index.html --> </header>
+  <!-- Header -->
+  <header>
+    <div class="header-content">
+      <a href="index.html" class="logo">
+        <span class="logo-sports">Sports</span><span class="logo-daily">Daily</span>
+      </a>
+      <div class="auth-buttons" id="authButtons">
+        <button class="btn btn-outline" id="loginBtn">Login</button>
+        <button class="btn btn-primary" id="signupBtn">Sign Up</button>
+      </div>
+      <div class="user-profile" id="userProfile" style="display: none;">
+        <span id="userName"></span>
+        <button class="btn btn-outline" id="logoutBtn">Logout</button>
+      </div>
+    </div>
+  </header>
 
-  <nav>... <!-- mesmo menu --> </nav>
+  <!-- Navigation -->
+  <nav>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="category-football.html" data-category="Football">Football</a></li>
+      <li><a href="category-basketball.html" data-category="Basketball">Basketball</a></li>
+      <li><a href="category-tennis.html" data-category="Tennis">Tennis</a></li>
+      <li><a href="category-cricket.html" data-category="Cricket">Cricket</a></li>
+      <li><a href="category-golf.html" data-category="Golf">Golf</a></li>
+    </ul>
+  </nav>
 
+  <!-- Main -->
   <main>
     <div class="category-header">
       <h1 id="categoryTitle">Category</h1>
       <p>Latest news and updates</p>
     </div>
+
     <section class="category-articles">
       <h2 class="section-header">Articles will go here...</h2>
       <div class="section-header-underline"></div>
-      <p style="text-align: center;">This is just a placeholder for the <strong id="categoryName"></strong> category. Real content coming soon!</p>
+      <p style="text-align: center;">This is a placeholder page for the <strong id="categoryName"></strong> category. Real content coming soon!</p>
     </section>
   </main>
 
-  <footer>... <!-- mesmo footer --> </footer>
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>About SportsDaily</h3>
+        <ul class="footer-links">
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Our Team</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Categories</h3>
+        <ul class="footer-links">
+          <li><a href="category-football.html">Football</a></li>
+          <li><a href="category-basketball.html">Basketball</a></li>
+          <li><a href="category-tennis.html">Tennis</a></li>
+          <li><a href="category-cricket.html">Cricket</a></li>
+          <li><a href="category-golf.html">Golf</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Follow Us</h3>
+        <ul class="footer-links">
+          <li><a href="#">Twitter</a></li>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">YouTube</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Legal</h3>
+        <ul class="footer-links">
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Cookie Policy</a></li>
+          <li><a href="#">GDPR</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>&copy; 2025 SportsDaily. All rights reserved.</p>
+    </div>
+  </footer>
 
+  <!-- Scripts -->
   <script src="tracking.js"></script>
+  <script src="script.js"></script>
   <script>
     const categoryFromURL = window.location.pathname.split('-')[1].replace('.html','');
     const formattedCategory = categoryFromURL.charAt(0).toUpperCase() + categoryFromURL.slice(1);

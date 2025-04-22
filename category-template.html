@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Category - SportsDaily</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>... <!-- mesmo header do index.html --> </header>
+
+  <nav>... <!-- mesmo menu --> </nav>
+
+  <main>
+    <div class="category-header">
+      <h1 id="categoryTitle">Category</h1>
+      <p>Latest news and updates</p>
+    </div>
+    <section class="category-articles">
+      <h2 class="section-header">Articles will go here...</h2>
+      <div class="section-header-underline"></div>
+      <p style="text-align: center;">This is just a placeholder for the <strong id="categoryName"></strong> category. Real content coming soon!</p>
+    </section>
+  </main>
+
+  <footer>... <!-- mesmo footer --> </footer>
+
+  <script src="tracking.js"></script>
+  <script>
+    const categoryFromURL = window.location.pathname.split('-')[1].replace('.html','');
+    const formattedCategory = categoryFromURL.charAt(0).toUpperCase() + categoryFromURL.slice(1);
+
+    document.getElementById('categoryTitle').textContent = `${formattedCategory} News`;
+    document.getElementById('categoryName').textContent = formattedCategory;
+
+    ZeroFirstTracker.trackCategoryView(formattedCategory);
+  </script>
+</body>
+</html>

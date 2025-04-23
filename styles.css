@@ -932,20 +932,6 @@ footer {
     z-index: 100 !important;
 }
 
-.close-ad {
-  position: absolute;
-  top: 5px;
-  right: 8px;
-  background: #e63946;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 25px;
-  height: 25px;
-  font-weight: bold;
-  cursor: pointer;
-  z-index: 10;
-}
 .category-featured {
   max-width: 1000px;     /* controla a largura total do bloco */
   margin: 0 auto;         /* CENTRALIZA na tela */
@@ -959,4 +945,19 @@ footer {
   max-width: 800px;
   height: 600px;
   object-fit: cover;
+}
+
+.close-ad {
+  position: absolute;
+  top: 5px;
+  right: 8px;
+  background: #e63946;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10;
 }

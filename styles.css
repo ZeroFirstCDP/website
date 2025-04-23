@@ -951,3 +951,12 @@ footer {
   margin: 0 auto;         /* CENTRALIZA na tela */
   padding: 0 16px;        /* espaço das bordas (opcional) */
 }
+
+.category-main-story img {
+  display: block;
+  margin: 0 auto;
+  width: 80%;            /* ou um valor fixo tipo 600px */
+  max-width: 800px;
+  height: 600px;
+  object-fit: cover;
+}

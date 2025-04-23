@@ -973,3 +973,8 @@ footer {
   box-sizing: border-box;   /* garante que o padding não ultrapasse os limites */
   width: 100%;              /* força o conteúdo a respeitar a largura da imagem */
 }
+
+.category-main-story h2 {
+  font-size: 1.2rem; /* ou ajuste conforme necessário */
+  margin-bottom: 8px;
+}

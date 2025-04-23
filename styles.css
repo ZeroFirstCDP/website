@@ -644,10 +644,11 @@ footer {
     color: #666;
 }
 
-.category-featured {
-  max-width: 900px;    /* ou a largura que fizer sentido pra você */
-  margin: 0 auto;      /* centraliza esse bloco na página */
-  padding: 0 16px;     /* opcional, só pra dar uma folga nas laterais */
+.featured-grid {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
 }
 
 .featured-grid {

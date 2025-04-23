@@ -954,3 +954,8 @@ footer {
   cursor: pointer;
   z-index: 10;
 }
+.category-featured {
+  max-width: 1000px;     /* controla a largura total do bloco */
+  margin: 0 auto;         /* CENTRALIZA na tela */
+  padding: 0 16px;        /* espaço das bordas (opcional) */
+}

@@ -645,10 +645,9 @@ footer {
 }
 
 .category-featured {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 15px;
-    margin-bottom: 60px;
+  max-width: 900px;    /* ou a largura que fizer sentido pra você */
+  margin: 0 auto;      /* centraliza esse bloco na página */
+  padding: 0 16px;     /* opcional, só pra dar uma folga nas laterais */
 }
 
 .featured-grid {

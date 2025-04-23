@@ -961,3 +961,15 @@ footer {
   cursor: pointer;
   z-index: 10;
 }
+
+.category-main-story .story-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 20%, transparent 70%);
+  color: white;
+  box-sizing: border-box;   /* garante que o padding não ultrapasse os limites */
+  width: 100%;              /* força o conteúdo a respeitar a largura da imagem */
+}

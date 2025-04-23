@@ -644,19 +644,6 @@ footer {
     color: #666;
 }
 
-.featured-grid {
-  max-width: 900px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr;
-}
-
-.featured-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 20px;
-}
-
 .category-main-story {
     position: relative;
     overflow: hidden;
@@ -816,8 +803,13 @@ footer {
     }
     
     .featured-grid {
-        grid-template-columns: 1fr;
+      display: grid;
+      grid-template-columns: 2fr 1fr; /* ou o que você quiser */
+      gap: 20px;
+      max-width: 900px;
+      margin: 0 auto;
     }
+
     
     .category-main-story {
         height: 400px;

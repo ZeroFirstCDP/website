@@ -260,4 +260,24 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Add admin controls if on admin page
-    if (window.location.
+    if (window.location.pathname.includes('admin')) {
+        const adminControls = document.createElement('div');
+        adminControls.classList.add('admin-controls');
+        adminControls.style.margin = '20px 0';
+        
+        const resetButton = document.createElement('button');
+        resetButton.textContent = 'Reset All User Data';
+        resetButton.style.backgroundColor = '#e63946';
+        resetButton.style.color = 'white';
+        resetButton.style.border = 'none';
+        resetButton.style.padding = '8px 16px';
+        resetButton.style.cursor = 'pointer';
+        resetButton.onclick = window.resetUserData;
+        
+        adminControls.appendChild(resetButton);
+        
+        // Insert at the top of the page
+        const firstElement = document.body.firstChild;
+        document.body.insertBefore(adminControls, firstElement);
+    }
+});

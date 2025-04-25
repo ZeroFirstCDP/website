@@ -234,6 +234,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
+    // Reset localStorage functionality (can be attached to an admin button if needed)
+    window.resetUserData = function() {
+        if (confirm('Are you sure you want to reset all user data? This will clear all localStorage.')) {
+            localStorage.clear();
+            alert('All user data has been reset.');
+            window.location.reload(); // Reload the page to reflect changes
+        }
+    };
+    
     // Initialize auth state
     checkAuth();
     
@@ -249,4 +258,26 @@ document.addEventListener('DOMContentLoaded', function() {
             this.style.boxShadow = 'none';
         });
     });
+    
+    // Add admin controls if on admin page
+    if (window.location.pathname.includes('admin')) {
+        const adminControls = document.createElement('div');
+        adminControls.classList.add('admin-controls');
+        adminControls.style.margin = '20px 0';
+        
+        const resetButton = document.createElement('button');
+        resetButton.textContent = 'Reset All User Data';
+        resetButton.style.backgroundColor = '#e63946';
+        resetButton.style.color = 'white';
+        resetButton.style.border = 'none';
+        resetButton.style.padding = '8px 16px';
+        resetButton.style.cursor = 'pointer';
+        resetButton.onclick = window.resetUserData;
+        
+        adminControls.appendChild(resetButton);
+        
+        // Insert at the top of the page
+        const firstElement = document.body.firstChild;
+        document.body.insertBefore(adminControls, firstElement);
+    }
 });

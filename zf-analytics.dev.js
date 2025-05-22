@@ -34,7 +34,7 @@
     };
 
     const defaultConfig = {
-        eventEndpoint: 'https://event-handler-wvhezqbhpa-lm.a.run.app/api/v1/events',
+        eventEndpoint: 'https://events.zerofirst.io/api/v1/events',
         writeKey: ''
     };
 

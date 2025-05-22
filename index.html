@@ -324,6 +324,34 @@
     
     <script src="tracking.js"></script>
     <script src="script.js"></script>
+    <script>
+
+    // Handle survey submission
+    document.getElementById('surveyForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const form = event.target;
+        const data = {
+            visitFrequency: form.visitFrequency.value,
+            favoriteSport: form.favoriteSport.value,
+            rating: form.rating.value
+        };
+
+        // 🔥 Track survey submission event
+        ZeroFirstTracker.trackSurveySubmission(data);
+
+        // 🔥 Identify the user with survey preferences
+        ZeroFirstTracker.identify({
+            visit_frequency: data.visitFrequency,
+            favorite_sport: data.favoriteSport,
+            content_rating: data.rating
+        });
+
+        alert('✅ Thank you for completing the survey!');
+        document.getElementById('surveySection').style.display = 'none';
+    });
+</script>
+
 </body>
 </html>
 

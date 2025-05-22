@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeBron Leads Lakers to Thrilling Overtime Victory - SportsDaily</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="zf-analytics.dev.js"></script>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+    <div class="header-content">
+        <a href="index.html" class="logo">
+            <span class="logo-sports">Sports</span><span class="logo-daily">Daily</span>
+        </a>
+        <div class="auth-buttons" id="authButtons">
+            <button class="btn btn-outline" id="loginBtn">Login</button>
+            <button class="btn btn-primary" id="signupBtn">Sign Up</button>
+        </div>
+        <div class="user-profile" id="userProfile" style="display: none;">
+            <span id="userName"></span>
+            <button class="btn btn-outline" id="logoutBtn">Logout</button>
+        </div>
+    </div>
+</header>
+
+<!-- Navigation -->
+<nav>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="category-football.html">Football</a></li>
+        <li><a href="category-basketball.html" class="active">Basketball</a></li>
+        <li><a href="category-tennis.html">Tennis</a></li>
+        <li><a href="category-cricket.html">Cricket</a></li>
+        <li><a href="category-golf.html">Golf</a></li>
+    </ul>
+</nav>
+
+<!-- Article Content -->
+<main>
+    <article class="article-content">
+        <div class="article-header">
+            <span class="category-tag">Basketball</span>
+            <h1>LeBron Leads Lakers to Thrilling Overtime Victory Against Warriors</h1>
+            <div class="article-meta">
+                <span>By Michael Johnson</span>
+                <span>April 20, 2025</span>
+                <span>6 min read</span>
+            </div>
+        </div>
+
+        <div class="article-image">
+            <img src="https://images.unsplash.com/photo-1581578016318-df9ef4fcf1bb?q=80&w=2070" alt="Lakers vs Warriors game">
+            <p class="image-caption">LeBron James celebrates after hitting the game-winning shot in overtime.</p>
+        </div>
+
+        <div class="article-body">
+            <p class="lead">In a nail-biting matchup at the Crypto.com Arena, the Los Angeles Lakers secured a dramatic overtime victory against the Golden State Warriors, with LeBron James leading the charge with 38 points.</p>
+
+            <h2>A Battle of Titans</h2>
+            <p>Both teams traded leads throughout the game, showcasing elite defense and highlight-reel plays. Stephen Curry dazzled with 33 points, including 7 three-pointers, while Anthony Davis added 22 points and 15 rebounds for the Lakers.</p>
+
+            <h2>The Game-Winning Moment</h2>
+            <p>With the game tied at 128 in overtime, LeBron took matters into his own hands. Driving past Draymond Green, he finished with a signature fadeaway jumper that gave the Lakers a two-point lead with 1.4 seconds remaining.</p>
+
+            <p>The Warriors' final attempt fell short as Klay Thompson's buzzer-beater rimmed out, sealing a vital win for the Lakers in their push for playoff seeding.</p>
+
+            <h2>Playoff Implications</h2>
+            <p>This victory moves the Lakers up to the 5th seed in the Western Conference, while the Warriors now face a tougher path with only four games left in the regular season.</p>
+
+            <div class="related-articles">
+                <h3>Related Articles</h3>
+                <ul>
+                    <li><a href="#">Top 5 NBA Plays of the Week</a></li>
+                    <li><a href="#">Can the Lakers Go All the Way This Season?</a></li>
+                    <li><a href="#">Stephen Curry's Impact Beyond the Arc</a></li>
+                </ul>
+            </div>
+        </div>
+    </article>
+
+    <!-- Sidebar Ad -->
+    <div class="ad-container sidebar-ad">
+        <div class="fake-ad" data-ad-id="article-sidebar-2">
+            <img src="https://placehold.co/300x250?text=NBA+Merch+-+Up+to+50%25+Off" alt="NBA Merchandise Ad">
+            <p>Shop the latest NBA gear now!</p>
+        </div>
+    </div>
+</main>
+
+<!-- Survey Section -->
+<section class="survey-section" id="surveySection" style="display: none;">
+    <div class="survey-container">
+        <h3>Help us improve your experience!</h3>
+        <p>Please take a moment to answer a few questions:</p>
+        <form id="surveyForm">
+            <div class="form-group">
+                <label>What's your favorite team?</label>
+                <select name="favoriteTeam" required>
+                    <option value="">Select team</option>
+                    <option value="lakers">Los Angeles Lakers</option>
+                    <option value="warriors">Golden State Warriors</option>
+                    <option value="celtics">Boston Celtics</option>
+                    <option value="bulls">Chicago Bulls</option>
+                    <option value="heat">Miami Heat</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>How do you usually follow the games?</label>
+                <select name="watchPreferences" required>
+                    <option value="">Select option</option>
+                    <option value="stadium">At the Stadium</option>
+                    <option value="live_tv">Live on TV</option>
+                    <option value="radio">Radio</option>
+                    <option value="highlights">Just Highlights</option>
+                    <option value="articles">Just Reading Articles</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit Survey</button>
+        </form>
+    </div>
+</section>
+
+<!-- Survey Script -->
+<script>
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            document.getElementById('surveySection').style.display = 'block';
+        }, 10000);
+    });
+
+    document.getElementById('surveyForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const form = event.target;
+        const data = {
+            favoriteTeam: form.favoriteTeam.value,
+            watchPreferences: form.watchPreferences.value
+        };
+
+        ZeroFirstTracker.trackSurveySubmission(data);
+
+        ZeroFirstTracker.identify({
+            favorite_team: data.favoriteTeam,
+            watch_preferences: data.watchPreferences
+        });
+
+        alert('✅ Thank you for completing the survey!');
+        document.getElementById('surveySection').style.display = 'none';
+    });
+</script>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>About SportsDaily</h3>
+            <ul class="footer-links">
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Our Team</a></li>
+                <li><a href="#">Careers</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Categories</h3>
+            <ul class="footer-links">
+                <li><a href="category-football.html">Football</a></li>
+                <li><a href="category-basketball.html">Basketball</a></li>
+                <li><a href="category-tennis.html">Tennis</a></li>
+                <li><a href="category-cricket.html">Cricket</a></li>
+                <li><a href="category-golf.html">Golf</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Follow Us</h3>
+            <ul class="footer-links">
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">Instagram</a></li>
+                <li><a href="#">YouTube</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Legal</h3>
+            <ul class="footer-links">
+                <li><a href="#">Terms of Service</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Cookie Policy</a></li>
+                <li><a href="#">GDPR</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>&copy; 2025 SportsDaily. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="tracking.js"></script>
+<script src="script.js"></script>
+
+<script>
+    // Track this specific article view
+    document.addEventListener('DOMContentLoaded', function() {
+        const articleData = {
+            id: '2',
+            title: 'LeBron Leads Lakers to Thrilling Overtime Victory Against Warriors',
+            category: 'Basketball',
+            author: 'Michael Johnson',
+            readTime: 6
+        };
+        ZeroFirstTracker.trackArticleView(articleData);
+    });
+</script>
+
+</body>
+</html>

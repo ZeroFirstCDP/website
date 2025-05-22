@@ -104,7 +104,7 @@
                     <option value="warriors">Golden State Warriors</option>
                     <option value="celtics">Boston Celtics</option>
                     <option value="bulls">Chicago Bulls</option>
-                    <option value="heat">Miami Heat</option>
+                    <option value="heat">Portland Trailblazers</option>
                     <option value="other">Other</option>
                 </select>
             </div>
@@ -113,7 +113,7 @@
                 <label>How do you usually follow the games?</label>
                 <select name="watchPreferences" required>
                     <option value="">Select option</option>
-                    <option value="stadium">At the Stadium</option>
+                    <option value="stadium">At the Court</option>
                     <option value="live_tv">Live on TV</option>
                     <option value="radio">Radio</option>
                     <option value="highlights">Just Highlights</option>
@@ -128,12 +128,14 @@
 
 <!-- Survey Script -->
 <script>
+    // Show survey after 10 seconds
     window.addEventListener('load', () => {
         setTimeout(() => {
             document.getElementById('surveySection').style.display = 'block';
         }, 10000);
     });
 
+    // Handle survey submission
     document.getElementById('surveyForm').addEventListener('submit', function(event) {
         event.preventDefault();
 
@@ -143,12 +145,19 @@
             watchPreferences: form.watchPreferences.value
         };
 
+        // 🔥 Get the article category dynamically
+        const category = document.querySelector('.category-tag').textContent.trim().toLowerCase();
+
+        // 🔥 Dynamically build traits
+        const traits = {};
+        traits[`favorite_${category}_team`] = data.favoriteTeam;
+        traits[`watch_${category}_preferences`] = data.watchPreferences;
+
+        // 🔥 Track survey submission
         ZeroFirstTracker.trackSurveySubmission(data);
 
-        ZeroFirstTracker.identify({
-            favorite_team: data.favoriteTeam,
-            watch_preferences: data.watchPreferences
-        });
+        // 🔥 Identify user with category-based traits
+        ZeroFirstTracker.identify(traits);
 
         alert('✅ Thank you for completing the survey!');
         document.getElementById('surveySection').style.display = 'none';

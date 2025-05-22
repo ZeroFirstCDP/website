@@ -91,7 +91,77 @@
             </div>
         </div>
     </main>
-    
+        <!-- Survey Section -->
+<section class="survey-section" id="surveySection" style="display: none;">
+    <div class="survey-container">
+        <h3>Help us improve your experience!</h3>
+        <p>Please take a moment to answer a few questions:</p>
+        <form id="surveyForm">
+            
+            <div class="form-group">
+                <label>What's your favorite team?</label>
+                <select name="favoriteTeam" required>
+                    <option value="">Select team</option>
+                    <option value="manchester_city">Manchester City</option>
+                    <option value="manchester_united">Manchester United</option>
+                    <option value="tottenham">Tottenham</option>
+                    <option value="chelsea">Chelsea</option>
+                    <option value="arsenal">Arsenal</option>
+                    <option value="liverpool">Liverpool</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>How do you usually follow the games?</label>
+                <select name="watchPreferences" required>
+                    <option value="">Select option</option>
+                    <option value="stadium">At the Stadium</option>
+                    <option value="live_tv">Live on TV</option>
+                    <option value="radio">Radio</option>
+                    <option value="highlights">Just Highlights</option>
+                    <option value="articles">Just Reading Articles</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Survey</button>
+        </form>
+    </div>
+</section>
+
+<script>
+    // Show survey after 10 seconds
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            document.getElementById('surveySection').style.display = 'block';
+        }, 10000);
+    });
+
+    // Handle survey submission
+    document.getElementById('surveyForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const form = event.target;
+        const data = {
+            visitFrequency: form.visitFrequency.value,
+            favoriteSport: form.favoriteSport.value,
+            favoriteTeam: form.favoriteTeam.value,
+            watchPreferences: form.watchPreferences.value,
+            rating: form.rating.value
+        };
+
+        // Track survey submission
+        ZeroFirstTracker.trackSurveySubmission(data);
+
+        // Send identify call with favorite team and watch preferences
+        ZeroFirstTracker.identify({
+            favorite_team: data.favoriteTeam,
+            watch_preferences: data.watchPreferences
+        });
+
+        alert('Thank you for completing the survey!');
+        document.getElementById('surveySection').style.display = 'none';
+    });
+</script>
     <!-- Footer -->
     <footer>
         <div class="footer-container">
@@ -210,117 +280,7 @@
         });
     </script>
 
-    <!-- Survey Section -->
-<section class="survey-section" id="surveySection" style="display: none;">
-    <div class="survey-container">
-        <h3>Help us improve your experience!</h3>
-        <p>Please take a moment to answer a few questions:</p>
-        <form id="surveyForm">
-            <div class="form-group">
-                <label>How often do you visit SportsDaily?</label>
-                <select name="visitFrequency" required>
-                    <option value="">Select frequency</option>
-                    <option value="daily">Daily</option>
-                    <option value="weekly">Weekly</option>
-                    <option value="monthly">Monthly</option>
-                    <option value="rarely">Rarely</option>
-                </select>
-            </div>
 
-            <div class="form-group">
-                <label>What's your favorite sport?</label>
-                <select name="favoriteSport" required>
-                    <option value="">Select sport</option>
-                    <option value="football">Football</option>
-                    <option value="basketball">Basketball</option>
-                    <option value="tennis">Tennis</option>
-                    <option value="cricket">Cricket</option>
-                    <option value="golf">Golf</option>
-                    <option value="other">Other</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>What's your favorite team?</label>
-                <select name="favoriteTeam" required>
-                    <option value="">Select team</option>
-                    <option value="manchester_city">Manchester City</option>
-                    <option value="manchester_united">Manchester United</option>
-                    <option value="tottenham">Tottenham</option>
-                    <option value="chelsea">Chelsea</option>
-                    <option value="arsenal">Arsenal</option>
-                    <option value="liverpool">Liverpool</option>
-                    <option value="other">Other</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>How do you usually follow the games?</label>
-                <select name="watchPreferences" required>
-                    <option value="">Select option</option>
-                    <option value="stadium">At the Stadium</option>
-                    <option value="live_tv">Live on TV</option>
-                    <option value="radio">Radio</option>
-                    <option value="highlights">Just Highlights</option>
-                    <option value="articles">Just Reading Articles</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>How would you rate our content?</label>
-                <div class="rating-stars">
-                    <input type="radio" name="rating" value="1" id="star1" required>
-                    <label for="star1">⭐</label>
-                    <input type="radio" name="rating" value="2" id="star2">
-                    <label for="star2">⭐</label>
-                    <input type="radio" name="rating" value="3" id="star3">
-                    <label for="star3">⭐</label>
-                    <input type="radio" name="rating" value="4" id="star4">
-                    <label for="star4">⭐</label>
-                    <input type="radio" name="rating" value="5" id="star5">
-                    <label for="star5">⭐</label>
-                </div>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Submit Survey</button>
-        </form>
-    </div>
-</section>
-
-<script>
-    // Show survey after 10 seconds
-    window.addEventListener('load', () => {
-        setTimeout(() => {
-            document.getElementById('surveySection').style.display = 'block';
-        }, 10000);
-    });
-
-    // Handle survey submission
-    document.getElementById('surveyForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        const form = event.target;
-        const data = {
-            visitFrequency: form.visitFrequency.value,
-            favoriteSport: form.favoriteSport.value,
-            favoriteTeam: form.favoriteTeam.value,
-            watchPreferences: form.watchPreferences.value,
-            rating: form.rating.value
-        };
-
-        // Track survey submission
-        ZeroFirstTracker.trackSurveySubmission(data);
-
-        // Send identify call with favorite team and watch preferences
-        ZeroFirstTracker.identify({
-            favorite_team: data.favoriteTeam,
-            watch_preferences: data.watchPreferences
-        });
-
-        alert('Thank you for completing the survey!');
-        document.getElementById('surveySection').style.display = 'none';
-    });
-</script>
     
 </body>
 </html>

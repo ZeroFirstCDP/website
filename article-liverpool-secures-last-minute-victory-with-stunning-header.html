@@ -146,16 +146,21 @@
             watchPreferences: form.watchPreferences.value
         };
 
-        // Track survey submission
+        // 🔥 Get the article category dynamically
+        const category = document.querySelector('.category-tag').textContent.trim().toLowerCase();
+
+        // 🔥 Dynamically build traits
+        const traits = {};
+        traits[`favorite_${category}_team`] = data.favoriteTeam;
+        traits[`watch_${category}_preferences`] = data.watchPreferences;
+
+        // 🔥 Track survey submission
         ZeroFirstTracker.trackSurveySubmission(data);
 
-        // Send identify call with favorite team and watch preferences
-        ZeroFirstTracker.identify({
-            favorite_team: data.favoriteTeam,
-            watch_preferences: data.watchPreferences
-        });
+        // 🔥 Identify user with category-based traits
+        ZeroFirstTracker.identify(traits);
 
-        alert('Thank you for completing the survey!');
+        alert('✅ Thank you for completing the survey!');
         document.getElementById('surveySection').style.display = 'none';
     });
 </script>

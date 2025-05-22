@@ -87,6 +87,13 @@ window.ZeroFirstTracker = {
             window.analytics.track('Survey Submission', surveyData);
         }
     },
+
+    // General Identify Call ✅ (NEW)
+    identify: function(userTraits) {
+        if (window.analytics && window.analytics.identify) {
+            window.analytics.identify(userTraits);
+        }
+    },
     
     // Track page view (general)
     trackPageView: function(pageName, properties) {

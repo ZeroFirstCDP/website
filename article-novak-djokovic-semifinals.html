@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novak Djokovic Advances to Semifinals After Epic Five-Set Match - SportsDaily</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="zf-analytics.dev.js"></script>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+    <div class="header-content">
+        <a href="index.html" class="logo">
+            <span class="logo-sports">Sports</span><span class="logo-daily">Daily</span>
+        </a>
+        <div class="auth-buttons" id="authButtons">
+            <button class="btn btn-outline" id="loginBtn">Login</button>
+            <button class="btn btn-primary" id="signupBtn">Sign Up</button>
+        </div>
+        <div class="user-profile" id="userProfile" style="display: none;">
+            <span id="userName"></span>
+            <button class="btn btn-outline" id="logoutBtn">Logout</button>
+        </div>
+    </div>
+</header>
+
+<!-- Navigation -->
+<nav>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="category-football.html">Football</a></li>
+        <li><a href="category-basketball.html">Basketball</a></li>
+        <li><a href="category-tennis.html" class="active">Tennis</a></li>
+        <li><a href="category-cricket.html">Cricket</a></li>
+        <li><a href="category-golf.html">Golf</a></li>
+    </ul>
+</nav>
+
+<!-- Article Content -->
+<main>
+    <article class="article-content">
+        <div class="article-header">
+            <span class="category-tag">Tennis</span>
+            <h1>Novak Djokovic Advances to Semifinals After Epic Five-Set Match</h1>
+            <div class="article-meta">
+                <span>By Sarah Johnson</span>
+                <span>April 21, 2025</span>
+                <span>6 min read</span>
+            </div>
+        </div>
+
+        <div class="article-image">
+            <img src="https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?q=80&w=2070" alt="Novak Djokovic celebrates">
+            <p class="image-caption">Novak Djokovic celebrates after clinching victory in a grueling five-set battle.</p>
+        </div>
+
+        <div class="article-body">
+            <p class="lead">In a display of sheer determination, Novak Djokovic battled back from two sets down to defeat rising star Carlos Alcaraz in a thrilling five-set quarterfinal match.</p>
+
+            <h2>A Rollercoaster Battle</h2>
+            <p>The match lasted over four hours, with both players pushing each other to the limit. Alcaraz took the first two sets with incredible shot-making, but Djokovic’s resilience and experience came through as he clawed his way back.</p>
+
+            <h2>Turning Point</h2>
+            <p>Midway through the third set, Djokovic broke serve after an intense 18-shot rally, shifting the momentum. From that point on, the Serbian star was relentless, dominating the fourth set and holding his nerve in the final set tiebreak.</p>
+
+            <h2>Chasing History</h2>
+            <p>This victory advances Djokovic to his 47th career Grand Slam semifinal, further extending his all-time record. A win here could bring him yet another major title, adding to his legacy as one of the greatest to ever play the game.</p>
+
+            <div class="related-articles">
+                <h3>Related Articles</h3>
+                <ul>
+                    <li><a href="#">Top 10 Greatest Tennis Matches of All Time</a></li>
+                    <li><a href="#">Carlos Alcaraz: The Next Tennis Superstar?</a></li>
+                    <li><a href="#">Grand Slam Records: Djokovic vs. Federer vs. Nadal</a></li>
+                </ul>
+            </div>
+        </div>
+    </article>
+
+    <!-- Sidebar Ad -->
+    <div class="ad-container sidebar-ad">
+        <div class="fake-ad" data-ad-id="article-sidebar-3">
+            <img src="https://placehold.co/300x250?text=Tennis+Gear+-+Up+to+50%25+Off" alt="Tennis Gear Advertisement">
+            <p>Exclusive Tennis Gear Deals - Shop Now!</p>
+        </div>
+    </div>
+</main>
+
+<!-- Survey Section -->
+<section class="survey-section" id="surveySection" style="display: none;">
+    <div class="survey-container">
+        <h3>Help us improve your experience!</h3>
+        <p>Please take a moment to answer a few questions:</p>
+        <form id="surveyForm">
+            <div class="form-group">
+                <label>What's your favorite tennis player?</label>
+                <select name="favoriteTeam" required>
+                    <option value="">Select player</option>
+                    <option value="novak_djokovic">Novak Djokovic</option>
+                    <option value="rafael_nadal">Rafael Nadal</option>
+                    <option value="carlos_alcaraz">Carlos Alcaraz</option>
+                    <option value="roger_federer">Roger Federer</option>
+                    <option value="iga_swiatek">Iga Swiatek</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>How do you usually follow the matches?</label>
+                <select name="watchPreferences" required>
+                    <option value="">Select option</option>
+                    <option value="stadium">At the Stadium</option>
+                    <option value="live_tv">Live on TV</option>
+                    <option value="radio">Radio</option>
+                    <option value="highlights">Just Highlights</option>
+                    <option value="articles">Just Reading Articles</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit Survey</button>
+        </form>
+    </div>
+</section>
+
+<!-- Survey Script -->
+<script>
+    // Show survey after 10 seconds
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            document.getElementById('surveySection').style.display = 'block';
+        }, 10000);
+    });
+
+    // Handle survey submission
+    document.getElementById('surveyForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const form = event.target;
+        const data = {
+            favoriteTeam: form.favoriteTeam.value,
+            watchPreferences: form.watchPreferences.value
+        };
+
+        const category = document.querySelector('.category-tag').textContent.trim().toLowerCase();
+
+        const traits = {};
+        traits[`favorite_${category}_team`] = data.favoriteTeam;
+        traits[`watch_${category}_preferences`] = data.watchPreferences;
+
+        ZeroFirstTracker.trackSurveySubmission(data);
+        ZeroFirstTracker.identify(traits);
+
+        alert('✅ Thank you for completing the survey!');
+        document.getElementById('surveySection').style.display = 'none';
+    });
+</script>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>About SportsDaily</h3>
+            <ul class="footer-links">
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Our Team</a></li>
+                <li><a href="#">Careers</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Categories</h3>
+            <ul class="footer-links">
+                <li><a href="category-football.html">Football</a></li>
+                <li><a href="category-basketball.html">Basketball</a></li>
+                <li><a href="category-tennis.html">Tennis</a></li>
+                <li><a href="category-cricket.html">Cricket</a></li>
+                <li><a href="category-golf.html">Golf</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Follow Us</h3>
+            <ul class="footer-links">
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">Instagram</a></li>
+                <li><a href="#">YouTube</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Legal</h3>
+            <ul class="footer-links">
+                <li><a href="#">Terms of Service</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Cookie Policy</a></li>
+                <li><a href="#">GDPR</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>&copy; 2025 SportsDaily. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="tracking.js"></script>
+<script src="script.js"></script>
+
+<script>
+    // Track this specific article view
+    document.addEventListener('DOMContentLoaded', function() {
+        const articleData = {
+            id: '3',
+            title: 'Novak Djokovic Advances to Semifinals After Epic Five-Set Match',
+            category: 'Tennis',
+            author: 'Sarah Johnson',
+            readTime: 6
+        };
+        ZeroFirstTracker.trackArticleView(articleData);
+    });
+</script>
+
+</body>
+</html>

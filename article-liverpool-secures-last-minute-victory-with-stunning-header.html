@@ -295,7 +295,17 @@
             ZeroFirstTracker.trackArticleView(articleData);
         });
     </script>
+<script>
+    document.getElementById('jerseySurveyForm').addEventListener('submit', function(event) {
+        event.preventDefault();
 
+        const value = event.target.jerseyPurchaseTime.value;
+        ZeroFirstTracker.trackSurveySubmission({ jerseyPurchaseTime: value });
+
+        alert('✅ Thanks for your answer!');
+        event.target.reset();
+    });
+</script>
 
     
 </body>

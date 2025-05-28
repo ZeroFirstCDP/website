@@ -151,8 +151,8 @@
 
         // 🔥 Dynamically build traits
         const traits = {};
-        traits[`favorite_${category}_team`] = data.favoriteTeam;
-        traits[`watch_${category}_preferences`] = data.watchPreferences;
+        traits[`What's your favorite ${category} team?`] = data.favoriteTeam;
+        traits[`How do you usually follow the ${category} games?`] = data.watchPreferences;
 
         // 🔥 Track survey submission
         ZeroFirstTracker.trackSurveySubmission(data);

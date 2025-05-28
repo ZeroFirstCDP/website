@@ -992,7 +992,10 @@ footer {
   object-fit: cover;
   display: block;
 }
-
+.inline-survey-container select,
+.inline-survey-container button {
+    font-family: inherit;
+}
 .story-content {
   position: absolute;
   bottom: 0;

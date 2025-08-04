@@ -512,7 +512,7 @@
     }
     else {
         const analytics = new Analytics({
-            writeKey: '7KMB5dEHVEUfsp9V14ghbXA6HTF0tAqY'
+            writeKey: 'tRs9hnsRLnkGCr20D7dwSFcve90QIw8k'
         });
         win.analytics = analytics;
         win.analytics.initialized = true;

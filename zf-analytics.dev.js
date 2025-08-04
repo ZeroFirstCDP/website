@@ -35,7 +35,7 @@
 
     const defaultConfig = {
         eventEndpoint: 'https://events.zerofirst.io/api/v1/gateway/events',
-        writeKey: ''
+        writeKey: 'tRs9hnsRLnkGCr20D7dwSFcve90QIw8k'
     };
 
     class ValidationError extends Error {

@@ -95,10 +95,10 @@
 
                     <!-- Step Timeline -->
                     <div class="flex items-center justify-center space-x-8 mb-12">
-                        <div class="flex items-center space-x-2">
+                        <a href="https://zerofirstcdp.github.io/website/admin/new-inferred-trait-1.html" class="flex items-center space-x-2">
                             <div class="w-8 h-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center font-bold"><i data-lucide="check"></i></div>
                             <span class="font-medium text-gray-500">Select Type</span>
-                        </div>
+                        </a>
                         <div class="h-px w-16 bg-purple-600"></div>
                         <div class="flex items-center space-x-2">
                             <div class="w-8 h-8 rounded-full bg-purple-600 text-white flex items-center justify-center font-bold">2</div>
@@ -180,7 +180,7 @@
                     </div>
 
                     <div class="mt-8 flex justify-between items-center">
-                        <button class="text-gray-600 font-semibold px-6 py-2 rounded-lg hover:bg-gray-100">Back</button>
+                        <a href="https://zerofirstcdp.github.io/website/admin/new-inferred-trait-1.html" class="text-gray-600 font-semibold px-6 py-2 rounded-lg hover:bg-gray-100">Back</a>
                         <button id="continue-button" class="bg-gray-300 text-gray-700 font-semibold px-6 py-2 rounded-lg cursor-not-allowed" disabled>Continue to Next Step</button>
                     </div>
                 </div>
@@ -307,6 +307,12 @@
             continueButton.classList.add('bg-purple-600', 'text-white', 'hover:bg-purple-700');
         });
 
+        continueButton.addEventListener('click', () => {
+            if (!continueButton.disabled) {
+                window.location.href = 'https://zerofirstcdp.github.io/website/admin/new-inferred-trait-3.html';
+            }
+        });
+
 
         // --- Conditions Logic ---
         const addConditionBtn = document.getElementById('add-condition-btn');
@@ -385,4 +391,3 @@
 
 </body>
 </html>
-

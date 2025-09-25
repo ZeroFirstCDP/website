@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Inferred Trait - ZeroFirst</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-white">
+
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-gray-100 flex flex-col flex-shrink-0 border-r border-gray-200">
+            <!-- Logo -->
+            <div class="h-24 flex items-center px-8">
+                <div class="flex items-center space-x-2">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 10V14M16 10V14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        <rect x="2" y="7" width="20" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                    </svg>
+                    <span class="font-bold text-lg">zero first</span>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="flex-1 px-4 py-4">
+                <ul class="space-y-2">
+                    <li><a href="#" class="flex items-center space-x-3 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded-lg p-3"><i data-lucide="users-2"></i><span class="font-medium">Audience</span></a></li>
+                    <li><a href="#" class="flex items-center space-x-3 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded-lg p-3"><i data-lucide="database"></i><span class="font-medium">Sources</span></a></li>
+                    <li><a href="#" class="flex items-center space-x-3 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded-lg p-3"><i data-lucide="arrow-right-left"></i><span class="font-medium">Destinations</span></a></li>
+                    <li>
+                        <button id="profiles-toggle" class="w-full flex items-center justify-between text-gray-600 bg-gray-200 rounded-lg p-3 text-left">
+                            <div class="flex items-center space-x-3"><i data-lucide="contact"></i><span class="font-medium">Profiles</span></div>
+                            <i data-lucide="chevron-down" id="profiles-chevron" class="w-5 h-5 transition-transform rotate-180"></i>
+                        </button>
+                        <ul id="profiles-submenu" class="pl-6 mt-2 space-y-1">
+                            <li><a href="#" class="block text-sm font-medium text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded-lg p-3">View profiles</a></li>
+                            <li><a href="#" class="block text-sm font-medium text-purple-700 bg-purple-50 rounded-lg p-3">Inferred traits</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#" class="flex items-center space-x-3 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded-lg p-3"><i data-lucide="shield-check"></i><span class="font-medium">Protocols</span></a></li>
+                    <li><a href="#" class="flex items-center space-x-3 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded-lg p-3"><i data-lucide="settings"></i><span class="font-medium">Settings</span></a></li>
+                </ul>
+            </nav>
+
+            <!-- User Info -->
+            <div class="p-4 border-t border-gray-200">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3"><i data-lucide="user-circle-2"></i><span class="font-medium">Username</span></div>
+                    <button class="text-gray-500 hover:text-gray-800"><i data-lucide="log-out" class="w-5 h-5"></i></button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col overflow-hidden">
+            <!-- Header -->
+            <header class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1506703195834-b7f3b8a1c52c?q=80&w=2070&auto=format&fit=crop');">
+                 <div class="h-full w-full bg-black bg-opacity-30 flex flex-col justify-end p-8">
+                    <div>
+                        <p class="text-white text-sm">Profiles > Inferred Traits > Create</p>
+                        <h1 class="text-white text-4xl font-bold mt-1">Review & Create Inferred Trait</h1>
+                    </div>
+                 </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="flex-1 p-8 overflow-y-auto">
+                <div class="max-w-4xl mx-auto">
+
+                    <!-- Step Timeline -->
+                    <div class="flex items-center justify-center space-x-8 mb-12">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-8 h-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center font-bold"><i data-lucide="check"></i></div>
+                            <span class="font-medium text-gray-500">Select Type</span>
+                        </div>
+                        <div class="h-px w-16 bg-purple-600"></div>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-8 h-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center font-bold"><i data-lucide="check"></i></div>
+                            <span class="font-medium text-gray-500">Configure</span>
+                        </div>
+                        <div class="h-px w-16 bg-purple-600"></div>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-8 h-8 rounded-full bg-purple-600 text-white flex items-center justify-center font-bold">3</div>
+                            <span class="font-semibold text-purple-600">Review</span>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- Summary Column -->
+                        <div class="md:col-span-2 bg-white border border-gray-200 rounded-xl p-8 space-y-6">
+                            <div>
+                                <h3 class="text-xs text-gray-500 font-semibold uppercase tracking-wider">Trait Name</h3>
+                                <p class="text-lg font-semibold text-gray-800 mt-1">Taylor Swift Fan</p>
+                            </div>
+                             <div>
+                                <h3 class="text-xs text-gray-500 font-semibold uppercase tracking-wider">Description</h3>
+                                <p class="text-gray-600 mt-1">tracks users that has played any Taylor Swift Music at least 30 times</p>
+                            </div>
+                            <div class="border-t border-gray-200"></div>
+                            <div>
+                                <h3 class="text-xs text-gray-500 font-semibold uppercase tracking-wider">Trait Type</h3>
+                                <div class="flex items-center space-x-3 mt-2">
+                                    <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                                        <span class="font-bold text-blue-600">123</span>
+                                    </div>
+                                    <span class="font-semibold text-gray-700">Event Counter</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-xs text-gray-500 font-semibold uppercase tracking-wider">Configuration</h3>
+                                <ul class="mt-2 space-y-3 text-sm">
+                                    <li class="flex items-center space-x-2">
+                                        <i data-lucide="calendar-days" class="w-4 h-4 text-gray-400"></i>
+                                        <span>Count occurrences of <span class="font-semibold">"Music Played"</span></span>
+                                    </li>
+                                    <li class="flex items-center space-x-2">
+                                        <i data-lucide="filter" class="w-4 h-4 text-gray-400"></i>
+                                        <span>Where <span class="font-semibold">artist</span> equals <span class="font-semibold bg-gray-100 px-1.5 py-0.5 rounded">Taylor Swift</span></span>
+                                    </li>
+                                    <li class="flex items-center space-x-2">
+                                        <i data-lucide="clock" class="w-4 h-4 text-gray-400"></i>
+                                        <span>Over the last <span class="font-semibold">30 days</span></span>
+                                    </li>
+                                    <li class="flex items-center space-x-2">
+                                        <i data-lucide="users" class="w-4 h-4 text-gray-400"></i>
+                                        <span>Includes anonymous users</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Preview Column -->
+                        <div class="space-y-6">
+                            <div class="bg-gray-50 border border-gray-200 rounded-xl p-6 text-center">
+                                <h3 class="font-semibold text-gray-800">Trait Preview</h3>
+                                <p class="text-5xl font-bold text-purple-600 my-4">42.320</p>
+                                <p class="text-sm text-gray-500">users have this trait based on the last 24 hours of data.</p>
+                                <button class="mt-4 w-full text-center text-sm font-semibold text-purple-600 hover:text-purple-800 flex items-center justify-center space-x-2">
+                                    <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+                                    <span>Refresh Preview</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 flex justify-between items-center">
+                        <button class="text-gray-600 font-semibold px-6 py-2 rounded-lg hover:bg-gray-100">Back</button>
+                        <button id="create-button" class="bg-purple-600 text-white font-semibold px-6 py-2 rounded-lg hover:bg-purple-700">Create Trait</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Sidebar toggle
+        document.getElementById('profiles-toggle').addEventListener('click', () => {
+            document.getElementById('profiles-submenu').classList.toggle('hidden');
+            document.getElementById('profiles-chevron').classList.toggle('rotate-180');
+        });
+    </script>
+</body>
+</html>
+

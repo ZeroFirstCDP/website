@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configure Event Counter - ZeroFirst</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .custom-select-option:hover {
+            background-color: #f3f4f6;
+        }
+        .custom-select-option.selected {
+            font-weight: 600;
+            color: #4f46e5;
+        }
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    </style>
+</head>
+<body class="bg-white">
+
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-gray-100 flex flex-col flex-shrink-0 border-r border-gray-200">
+            <!-- Logo -->
+            <div class="h-24 flex items-center px-8">
+                <div class="flex items-center space-x-2">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 10V14M16 10V14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        <rect x="2" y="7" width="20" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                    </svg>
+                    <span class="font-bold text-lg">zero first</span>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+             <nav class="flex-1 px-4 py-4">
+                <ul class="space-y-2">
+                    <li><a href="#" class="flex items-center space-x-3 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded-lg p-3"><i data-lucide="users-2"></i><span class="font-medium">Audience</span></a></li>
+                    <li><a href="#" class="flex items-center space-x-3 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded-lg p-3"><i data-lucide="database"></i><span class="font-medium">Sources</span></a></li>
+                    <li><a href="#" class="flex items-center space-x-3 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded-lg p-3"><i data-lucide="arrow-right-left"></i><span class="font-medium">Destinations</span></a></li>
+                    <li>
+                        <button id="profiles-toggle" class="w-full flex items-center justify-between text-gray-600 bg-gray-200 rounded-lg p-3 text-left">
+                            <div class="flex items-center space-x-3"><i data-lucide="contact"></i><span class="font-medium">Profiles</span></div>
+                            <i data-lucide="chevron-down" id="profiles-chevron" class="w-5 h-5 transition-transform rotate-180"></i>
+                        </button>
+                        <ul id="profiles-submenu" class="pl-6 mt-2 space-y-1">
+                            <li><a href="#" class="block text-sm font-medium text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded-lg p-3">View profiles</a></li>
+                            <li><a href="#" class="block text-sm font-medium text-purple-700 bg-purple-50 rounded-lg p-3">Inferred traits</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#" class="flex items-center space-x-3 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded-lg p-3"><i data-lucide="shield-check"></i><span class="font-medium">Protocols</span></a></li>
+                    <li><a href="#" class="flex items-center space-x-3 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded-lg p-3"><i data-lucide="settings"></i><span class="font-medium">Settings</span></a></li>
+                </ul>
+            </nav>
+
+            <!-- User Info -->
+            <div class="p-4 border-t border-gray-200">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3"><i data-lucide="user-circle-2"></i><span class="font-medium">Username</span></div>
+                    <button class="text-gray-500 hover:text-gray-800"><i data-lucide="log-out" class="w-5 h-5"></i></button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col overflow-hidden">
+             <!-- Header -->
+            <header class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1506703195834-b7f3b8a1c52c?q=80&w=2070&auto=format&fit=crop');">
+                 <div class="h-full w-full bg-black bg-opacity-30 flex flex-col justify-end p-8">
+                    <div>
+                        <p class="text-white text-sm">Profiles > Inferred Traits > Create</p>
+                        <h1 class="text-white text-4xl font-bold mt-1">Configure Inferred Trait</h1>
+                    </div>
+                 </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="flex-1 p-8 overflow-y-auto no-scrollbar">
+                <div class="max-w-4xl mx-auto">
+
+                    <!-- Step Timeline -->
+                    <div class="flex items-center justify-center space-x-8 mb-12">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-8 h-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center font-bold"><i data-lucide="check"></i></div>
+                            <span class="font-medium text-gray-500">Select Type</span>
+                        </div>
+                        <div class="h-px w-16 bg-purple-600"></div>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-8 h-8 rounded-full bg-purple-600 text-white flex items-center justify-center font-bold">2</div>
+                            <span class="font-semibold text-purple-600">Configure</span>
+                        </div>
+                        <div class="h-px w-16 bg-gray-300"></div>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-8 h-8 rounded-full border-2 border-gray-300 text-gray-400 flex items-center justify-center font-bold">3</div>
+                            <span class="font-medium text-gray-400">Review</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Form Content -->
+                    <div class="bg-white border border-gray-200 rounded-xl p-8">
+                        <div class="flex items-center space-x-4 pb-6 border-b border-gray-200">
+                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                                <span class="text-2xl font-bold text-blue-600">123</span>
+                            </div>
+                            <div>
+                                <h2 class="text-xl font-bold text-gray-800">Event Counter</h2>
+                                <p class="text-gray-500">Stores a count of a certain event over a period of time</p>
+                            </div>
+                        </div>
+
+                        <div class="py-6 space-y-6">
+                            <div>
+                                <label for="trait-name" class="block text-sm font-medium text-gray-700">Inferred Trait Name</label>
+                                <input type="text" id="trait-name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="e.g., logins_last_7_days" required>
+                            </div>
+
+                            <div>
+                                <label for="trait-description" class="block text-sm font-medium text-gray-700">Description <span class="text-gray-500">(Optional)</span></label>
+                                <textarea id="trait-description" rows="2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="Describe what this trait is for..."></textarea>
+                            </div>
+                            
+                            <div class="border-t border-gray-200 !mt-8 pt-6">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Select an event name</label>
+                                <!-- Custom Select Component with Search -->
+                                <div class="relative custom-select-container" id="event-select-container">
+                                    <button type="button" class="custom-select-button relative w-full sm:w-80 cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+                                        <span class="block truncate custom-select-label">Select an option</span>
+                                        <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2"><i data-lucide="chevron-down" class="h-5 w-5 text-gray-400"></i></span>
+                                    </button>
+                                    <div class="absolute z-10 mt-1 w-full sm:w-80 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden custom-select-options-wrapper">
+                                        <div class="p-2"><input type="text" class="custom-select-search w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm" placeholder="Search..."></div>
+                                        <ul class="max-h-56 overflow-auto py-1 text-base sm:text-sm custom-select-options">
+                                            <li class="custom-select-option text-gray-900 relative cursor-default select-none py-2 pl-3 pr-9" data-value="Product Viewed"><span class="block truncate">Product Viewed</span><span class="check-icon hidden absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"><i data-lucide="check" class="h-5 w-5"></i></span></li>
+                                            <li class="custom-select-option text-gray-900 relative cursor-default select-none py-2 pl-3 pr-9" data-value="Added to Cart"><span class="block truncate">Added to Cart</span><span class="check-icon hidden absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"><i data-lucide="check" class="h-5 w-5"></i></span></li>
+                                            <li class="custom-select-option text-gray-900 relative cursor-default select-none py-2 pl-3 pr-9" data-value="Purchase Completed"><span class="block truncate">Purchase Completed</span><span class="check-icon hidden absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"><i data-lucide="check" class="h-5 w-5"></i></span></li>
+                                            <li class="custom-select-option text-gray-900 relative cursor-default select-none py-2 pl-3 pr-9" data-value="User Login"><span class="block truncate">User Login</span><span class="check-icon hidden absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"><i data-lucide="check" class="h-5 w-5"></i></span></li>
+                                            <li class="custom-select-option text-gray-900 relative cursor-default select-none py-2 pl-3 pr-9" data-value="Page Visit"><span class="block truncate">Page Visit</span><span class="check-icon hidden absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"><i data-lucide="check" class="h-5 w-5"></i></span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Conditions Section -->
+                            <div id="conditions-container" class="space-y-4"></div>
+                            <div>
+                                <button id="add-condition-btn" class="border border-gray-300 rounded-md px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50 flex items-center space-x-2">
+                                    <i data-lucide="plus" class="w-4 h-4"></i>
+                                    <span>Add Conditions</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-gray-200 pt-6 space-y-4">
+                           <div class="flex items-center space-x-2 text-sm">
+                               <span>Run computation over the last</span>
+                               <input type="number" value="7" class="w-16 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                               <span>days</span>
+                               <i data-lucide="x" class="h-5 w-5 text-gray-400 cursor-pointer"></i>
+                           </div>
+                           <div class="flex items-center">
+                                <input id="include-anonymous" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                <label for="include-anonymous" class="ml-2 block text-sm text-gray-900">Include anonymous users</label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="mt-8 flex justify-between items-center">
+                        <button class="text-gray-600 font-semibold px-6 py-2 rounded-lg hover:bg-gray-100">Back</button>
+                        <button id="continue-button" class="bg-gray-300 text-gray-700 font-semibold px-6 py-2 rounded-lg cursor-not-allowed" disabled>Continue to Next Step</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <template id="condition-template">
+        <div class="condition-row bg-gray-50 p-4 rounded-lg border border-gray-200 flex flex-wrap items-start gap-4">
+            <!-- Property -->
+            <div class="flex-shrink-0">
+                <select class="condition-property-select rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                    <option>Select property</option>
+                    <option>price</option>
+                    <option>page.url</option>
+                    <option>item_name</option>
+                    <option>category</option>
+                </select>
+            </div>
+            <!-- Operator -->
+            <div class="flex-shrink-0">
+                <select class="condition-operator-select rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                    <option value="equals">equals</option>
+                    <option value="not_equals">not equals</option>
+                    <option value="less_than">less than</option>
+                    <option value="greater_than">greater than</option>
+                    <option value="contains">contains</option>
+                    <option value="not_contains">does not contain</option>
+                </select>
+            </div>
+            <!-- Value -->
+            <div class="condition-value-container flex-grow">
+                <!-- Dropdown for equals/not_equals -->
+                <div class="value-input value-dropdown hidden">
+                    <select class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                        <option>Select value</option>
+                        <option>T-Shirt</option>
+                        <option>Hat</option>
+                    </select>
+                </div>
+                <!-- Numeric for less_than/greater_than -->
+                <div class="value-input value-numeric hidden">
+                     <input type="text" placeholder="Enter a number" class="numeric-input w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                     <p class="numeric-warning hidden text-xs text-red-500 mt-1">Please enter a valid number.</p>
+                </div>
+                <!-- Text for contains/not_contains -->
+                <div class="value-input value-text hidden">
+                     <input type="text" placeholder="Enter text" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                </div>
+            </div>
+             <!-- Remove Button -->
+            <div class="flex-shrink-0">
+                <button class="remove-condition-btn text-gray-400 hover:text-red-500">
+                    <i data-lucide="trash-2" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+    </template>
+
+
+    <script>
+        lucide.createIcons();
+
+        // Sidebar toggle
+        document.getElementById('profiles-toggle').addEventListener('click', () => {
+            document.getElementById('profiles-submenu').classList.toggle('hidden');
+            document.getElementById('profiles-chevron').classList.toggle('rotate-180');
+        });
+        
+        const continueButton = document.getElementById('continue-button');
+
+        // --- Generic Custom Select with Search ---
+        function initializeCustomSelect(container) {
+            const button = container.querySelector('.custom-select-button');
+            const label = container.querySelector('.custom-select-label');
+            const optionsWrapper = container.querySelector('.custom-select-options-wrapper');
+            const optionsList = container.querySelector('.custom-select-options');
+            const searchInput = container.querySelector('.custom-select-search');
+            const allOptions = optionsList.querySelectorAll('.custom-select-option');
+
+            button.addEventListener('click', (e) => {
+                e.stopPropagation();
+                optionsWrapper.classList.toggle('hidden');
+            });
+
+            searchInput.addEventListener('input', () => {
+                const searchTerm = searchInput.value.toLowerCase();
+                allOptions.forEach(option => {
+                    const value = option.dataset.value.toLowerCase();
+                    if (value.includes(searchTerm)) {
+                        option.style.display = '';
+                    } else {
+                        option.style.display = 'none';
+                    }
+                });
+            });
+
+            allOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    label.textContent = option.dataset.value;
+                    
+                    allOptions.forEach(opt => {
+                        opt.classList.remove('selected');
+                        opt.querySelector('.check-icon').classList.add('hidden');
+                    });
+                    option.classList.add('selected');
+                    option.querySelector('.check-icon').classList.remove('hidden');
+
+                    optionsWrapper.classList.add('hidden');
+
+                    // Fire a custom event to notify that a selection was made
+                    container.dispatchEvent(new CustomEvent('selectionChanged', { detail: { value: option.dataset.value } }));
+                });
+            });
+        }
+        
+        // Initialize the main event select
+        const eventSelectContainer = document.getElementById('event-select-container');
+        initializeCustomSelect(eventSelectContainer);
+        eventSelectContainer.addEventListener('selectionChanged', () => {
+             // Enable continue button
+            continueButton.disabled = false;
+            continueButton.classList.remove('bg-gray-300', 'text-gray-700', 'cursor-not-allowed');
+            continueButton.classList.add('bg-purple-600', 'text-white', 'hover:bg-purple-700');
+        });
+
+
+        // --- Conditions Logic ---
+        const addConditionBtn = document.getElementById('add-condition-btn');
+        const conditionsContainer = document.getElementById('conditions-container');
+        const conditionTemplate = document.getElementById('condition-template');
+
+        addConditionBtn.addEventListener('click', () => {
+            const newCondition = conditionTemplate.content.cloneNode(true);
+            conditionsContainer.appendChild(newCondition);
+            const newRow = conditionsContainer.lastElementChild;
+            
+            // Re-run lucide to render the new trash icon
+            lucide.createIcons({ nodes: [newRow] });
+
+            // Set initial value input state
+            updateValueInput(newRow); 
+        });
+
+        conditionsContainer.addEventListener('change', (e) => {
+            if (e.target.classList.contains('condition-operator-select')) {
+                const row = e.target.closest('.condition-row');
+                updateValueInput(row);
+            }
+        });
+        
+        conditionsContainer.addEventListener('click', (e) => {
+             if (e.target.closest('.remove-condition-btn')) {
+                e.target.closest('.condition-row').remove();
+            }
+        });
+
+        conditionsContainer.addEventListener('input', (e) => {
+            if (e.target.classList.contains('numeric-input')) {
+                validateNumericInput(e.target);
+            }
+        });
+
+        function updateValueInput(row) {
+            const operator = row.querySelector('.condition-operator-select').value;
+            const valueContainer = row.querySelector('.condition-value-container');
+
+            // Hide all inputs first
+            valueContainer.querySelectorAll('.value-input').forEach(input => input.classList.add('hidden'));
+
+            // Show the correct one
+            if (operator === 'equals' || operator === 'not_equals') {
+                valueContainer.querySelector('.value-dropdown').classList.remove('hidden');
+            } else if (operator === 'less_than' || operator === 'greater_than') {
+                valueContainer.querySelector('.value-numeric').classList.remove('hidden');
+            } else if (operator === 'contains' || operator === 'not_contains') {
+                valueContainer.querySelector('.value-text').classList.remove('hidden');
+            }
+        }
+
+        function validateNumericInput(input) {
+            const warning = input.nextElementSibling;
+            const isValid = /^-?\d*\.?\d*$/.test(input.value);
+            if (input.value === '' || isValid) {
+                warning.classList.add('hidden');
+                input.classList.remove('border-red-500');
+            } else {
+                warning.classList.remove('hidden');
+                input.classList.add('border-red-500');
+            }
+        }
+
+        // Close all custom dropdowns when clicking outside
+        document.addEventListener('click', (e) => {
+            document.querySelectorAll('.custom-select-container').forEach(container => {
+                if (!container.contains(e.target)) {
+                    container.querySelector('.custom-select-options-wrapper').classList.add('hidden');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
+

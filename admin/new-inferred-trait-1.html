@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Inferred Trait - ZeroFirst</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-white">
+
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-gray-100 flex flex-col flex-shrink-0 border-r border-gray-200">
+            <!-- Logo -->
+            <div class="h-24 flex items-center px-8">
+                <div class="flex items-center space-x-2">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 10V14M16 10V14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        <rect x="2" y="7" width="20" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                    </svg>
+                    <span class="font-bold text-lg">zero first</span>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="flex-1 px-4 py-4">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="#" class="flex items-center space-x-3 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded-lg p-3">
+                            <i data-lucide="users-2"></i>
+                            <span class="font-medium">Audience</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center space-x-3 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded-lg p-3">
+                            <i data-lucide="database"></i>
+                            <span class="font-medium">Sources</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center space-x-3 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded-lg p-3">
+                           <i data-lucide="arrow-right-left"></i>
+                            <span class="font-medium">Destinations</span>
+                        </a>
+                    </li>
+                    <li>
+                        <button id="profiles-toggle" class="w-full flex items-center justify-between text-gray-600 bg-gray-200 rounded-lg p-3 text-left">
+                            <div class="flex items-center space-x-3">
+                                <i data-lucide="contact"></i>
+                                <span class="font-medium">Profiles</span>
+                            </div>
+                            <i data-lucide="chevron-down" id="profiles-chevron" class="w-5 h-5 transition-transform rotate-180"></i>
+                        </button>
+                        <ul id="profiles-submenu" class="pl-6 mt-2 space-y-1">
+                            <li>
+                                <a href="#" class="block text-sm font-medium text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded-lg p-3">
+                                    View profiles
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="block text-sm font-medium text-purple-700 bg-purple-50 rounded-lg p-3">
+                                    Inferred traits
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center space-x-3 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded-lg p-3">
+                           <i data-lucide="shield-check"></i>
+                            <span class="font-medium">Protocols</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center space-x-3 text-gray-600 hover:bg-gray-200 hover:text-gray-800 rounded-lg p-3">
+                            <i data-lucide="settings"></i>
+                            <span class="font-medium">Settings</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- User Info -->
+            <div class="p-4 border-t border-gray-200">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <i data-lucide="user-circle-2"></i>
+                        <span class="font-medium">Username</span>
+                    </div>
+                    <button class="text-gray-500 hover:text-gray-800">
+                        <i data-lucide="log-out" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col overflow-hidden">
+             <!-- Header -->
+            <header class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1506703195834-b7f3b8a1c52c?q=80&w=2070&auto=format&fit=crop');">
+                 <div class="h-full w-full bg-black bg-opacity-30 flex flex-col justify-end p-8">
+                    <div>
+                        <p class="text-white text-sm">Profiles > Inferred Traits > Create</p>
+                        <h1 class="text-white text-4xl font-bold mt-1">Select Inferred Trait Type</h1>
+                    </div>
+                 </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="flex-1 p-8 overflow-y-auto">
+                <div class="max-w-4xl mx-auto">
+
+                    <!-- Step Timeline -->
+                    <div class="flex items-center justify-center space-x-8 mb-12">
+                        <!-- Step 1 -->
+                        <div class="flex items-center space-x-2">
+                            <div class="w-8 h-8 rounded-full bg-purple-600 text-white flex items-center justify-center font-bold">1</div>
+                            <span class="font-semibold text-purple-600">Select Type</span>
+                        </div>
+                        <div class="h-px w-16 bg-gray-300"></div>
+                        <!-- Step 2 -->
+                        <div class="flex items-center space-x-2">
+                            <div class="w-8 h-8 rounded-full border-2 border-gray-300 text-gray-400 flex items-center justify-center font-bold">2</div>
+                            <span class="font-medium text-gray-400">Configure</span>
+                        </div>
+                        <div class="h-px w-16 bg-gray-300"></div>
+                        <!-- Step 3 -->
+                        <div class="flex items-center space-x-2">
+                            <div class="w-8 h-8 rounded-full border-2 border-gray-300 text-gray-400 flex items-center justify-center font-bold">3</div>
+                            <span class="font-medium text-gray-400">Review</span>
+                        </div>
+                    </div>
+
+                    <h2 class="text-xl font-semibold text-gray-800 text-center">Step 1: Select the type of trait to create</h2>
+                    <p class="text-gray-600 mt-2 text-center">Each type of computed trait serves a different purpose. Choose the one that best fits your needs.</p>
+                    
+                    <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Event Counter Card -->
+                        <div id="event-counter-card" class="trait-card border border-gray-200 rounded-lg p-6 transition-all cursor-pointer bg-white">
+                            <div class="flex items-start space-x-4">
+                                <div class="bg-purple-100 rounded-lg p-3">
+                                    <i data-lucide="repeat" class="w-6 h-6 text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-800">Event Counter</h3>
+                                    <p class="mt-2 text-sm text-gray-600">An Event Counter trait stores a count of an event over a period of time. You can also use event properties to only specific types of events.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Most Frequent Card -->
+                        <div id="most-frequent-card" class="trait-card border border-gray-200 rounded-lg p-6 transition-all cursor-pointer bg-white">
+                             <div class="flex items-start space-x-4">
+                                <div class="bg-purple-100 rounded-lg p-3">
+                                    <i data-lucide="bar-chart-3" class="w-6 h-6 text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-800">Most Frequent</h3>
+                                    <p class="mt-2 text-sm text-gray-600">A most frequent user-level computed trait will return the most common value for an event property. In the case of a tie, the first alphabetical value is returned.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-12 flex justify-between items-center">
+                        <button class="text-gray-600 font-semibold px-6 py-2 rounded-lg hover:bg-gray-100">Back</button>
+                        <button id="continue-button" class="bg-gray-300 text-gray-700 font-semibold px-6 py-2 rounded-lg cursor-not-allowed" disabled>Continue to Next Step</button>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Sidebar toggle functionality
+        const profilesToggle = document.getElementById('profiles-toggle');
+        const profilesSubmenu = document.getElementById('profiles-submenu');
+        const profilesChevron = document.getElementById('profiles-chevron');
+
+        profilesToggle.addEventListener('click', () => {
+            profilesSubmenu.classList.toggle('hidden');
+            profilesChevron.classList.toggle('rotate-180');
+        });
+
+        // Trait selection functionality
+        const eventCounterCard = document.getElementById('event-counter-card');
+        const mostFrequentCard = document.getElementById('most-frequent-card');
+        const continueButton = document.getElementById('continue-button');
+        const cards = document.querySelectorAll('.trait-card');
+
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                // Reset styles for all cards
+                cards.forEach(c => {
+                    c.classList.remove('border-purple-500', 'ring-2', 'ring-purple-200', 'shadow-lg');
+                    c.classList.add('border-gray-200');
+                });
+
+                // Apply selected styles to the clicked card
+                card.classList.remove('border-gray-200');
+                card.classList.add('border-purple-500', 'ring-2', 'ring-purple-200', 'shadow-lg');
+
+                // Enable the continue button
+                continueButton.disabled = false;
+                continueButton.classList.remove('bg-gray-300', 'text-gray-700', 'cursor-not-allowed');
+                continueButton.classList.add('bg-purple-600', 'text-white', 'hover:bg-purple-700');
+            });
+        });
+
+        continueButton.addEventListener('click', () => {
+            if (!continueButton.disabled) {
+                window.location.href = 'https://zerofirstcdp.github.io/website/admin/new-inferred-trait-2.html';
+            }
+        });
+
+    </script>
+
+</body>
+</html>
+

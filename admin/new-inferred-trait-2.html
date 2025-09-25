@@ -145,11 +145,12 @@
                                     <div class="absolute z-10 mt-1 w-full sm:w-80 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden custom-select-options-wrapper">
                                         <div class="p-2"><input type="text" class="custom-select-search w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:text-sm" placeholder="Search..."></div>
                                         <ul class="max-h-56 overflow-auto py-1 text-base sm:text-sm custom-select-options">
-                                            <li class="custom-select-option text-gray-900 relative cursor-default select-none py-2 pl-3 pr-9" data-value="Product Viewed"><span class="block truncate">Product Viewed</span><span class="check-icon hidden absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"><i data-lucide="check" class="h-5 w-5"></i></span></li>
-                                            <li class="custom-select-option text-gray-900 relative cursor-default select-none py-2 pl-3 pr-9" data-value="Added to Cart"><span class="block truncate">Added to Cart</span><span class="check-icon hidden absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"><i data-lucide="check" class="h-5 w-5"></i></span></li>
-                                            <li class="custom-select-option text-gray-900 relative cursor-default select-none py-2 pl-3 pr-9" data-value="Purchase Completed"><span class="block truncate">Purchase Completed</span><span class="check-icon hidden absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"><i data-lucide="check" class="h-5 w-5"></i></span></li>
-                                            <li class="custom-select-option text-gray-900 relative cursor-default select-none py-2 pl-3 pr-9" data-value="User Login"><span class="block truncate">User Login</span><span class="check-icon hidden absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"><i data-lucide="check" class="h-5 w-5"></i></span></li>
-                                            <li class="custom-select-option text-gray-900 relative cursor-default select-none py-2 pl-3 pr-9" data-value="Page Visit"><span class="block truncate">Page Visit</span><span class="check-icon hidden absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"><i data-lucide="check" class="h-5 w-5"></i></span></li>
+                                            <li class="custom-select-option text-gray-900 relative cursor-default select-none py-2 pl-3 pr-9" data-value="Episode played"><span class="block truncate">Episode played</span><span class="check-icon hidden absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"><i data-lucide="check" class="h-5 w-5"></i></span></li>
+                                            <li class="custom-select-option text-gray-900 relative cursor-default select-none py-2 pl-3 pr-9" data-value="Poll question answered"><span class="block truncate">Poll question answered</span><span class="check-icon hidden absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"><i data-lucide="check" class="h-5 w-5"></i></span></li>
+                                            <li class="custom-select-option text-gray-900 relative cursor-default select-none py-2 pl-3 pr-9" data-value="Song disliked"><span class="block truncate">Song disliked</span><span class="check-icon hidden absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"><i data-lucide="check" class="h-5 w-5"></i></span></li>
+                                            <li class="custom-select-option text-gray-900 relative cursor-default select-none py-2 pl-3 pr-9" data-value="Song liked"><span class="block truncate">Song liked</span><span class="check-icon hidden absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"><i data-lucide="check" class="h-5 w-5"></i></span></li>
+                                            <li class="custom-select-option text-gray-900 relative cursor-default select-none py-2 pl-3 pr-9" data-value="Song preview played"><span class="block truncate">Song preview played</span><span class="check-icon hidden absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"><i data-lucide="check" class="h-5 w-5"></i></span></li>
+                                            <li class="custom-select-option text-gray-900 relative cursor-default select-none py-2 pl-3 pr-9" data-value="Channel played"><span class="block truncate">Channel played</span><span class="check-icon hidden absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"><i data-lucide="check" class="h-5 w-5"></i></span></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -194,10 +195,6 @@
             <div class="flex-shrink-0">
                 <select class="condition-property-select rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                     <option>Select property</option>
-                    <option>price</option>
-                    <option>page.url</option>
-                    <option>item_name</option>
-                    <option>category</option>
                 </select>
             </div>
             <!-- Operator -->
@@ -252,6 +249,16 @@
         
         const continueButton = document.getElementById('continue-button');
 
+        const eventProperties = {
+            "Episode played": ["podcast_episode_id", "podcast_episode_name", "channel_name", "channel_id"],
+            "Poll question answered": ["answer_id", "poll_id", "question_id", "poll"],
+            "Song disliked": ["song_id", "track_name", "artist"],
+            "Song liked": ["song_id", "track_name", "artist"],
+            "Song preview played": ["song_id", "track_name", "artist"],
+            "Channel played": ["channel_id", "channel_name", "user_agent", "user_id"]
+        };
+        let selectedEvent = null;
+
         // --- Generic Custom Select with Search ---
         function initializeCustomSelect(container) {
             const button = container.querySelector('.custom-select-button');
@@ -300,7 +307,10 @@
         // Initialize the main event select
         const eventSelectContainer = document.getElementById('event-select-container');
         initializeCustomSelect(eventSelectContainer);
-        eventSelectContainer.addEventListener('selectionChanged', () => {
+        eventSelectContainer.addEventListener('selectionChanged', (e) => {
+             selectedEvent = e.detail.value;
+             // Clear existing conditions when event changes for simplicity
+             conditionsContainer.innerHTML = '';
              // Enable continue button
             continueButton.disabled = false;
             continueButton.classList.remove('bg-gray-300', 'text-gray-700', 'cursor-not-allowed');
@@ -320,7 +330,27 @@
         const conditionTemplate = document.getElementById('condition-template');
 
         addConditionBtn.addEventListener('click', () => {
+            if (!selectedEvent) {
+                // In a real app, you might show a more user-friendly message
+                console.warn("Please select an event before adding conditions.");
+                return;
+            }
+
             const newCondition = conditionTemplate.content.cloneNode(true);
+            const propertySelect = newCondition.querySelector('.condition-property-select');
+            
+            // Clear placeholder
+            propertySelect.innerHTML = '<option>Select property</option>';
+
+            // Populate properties based on selected event
+            const properties = eventProperties[selectedEvent] || [];
+            properties.forEach(prop => {
+                const option = document.createElement('option');
+                option.value = prop;
+                option.textContent = prop;
+                propertySelect.appendChild(option);
+            });
+
             conditionsContainer.appendChild(newCondition);
             const newRow = conditionsContainer.lastElementChild;
             
@@ -391,3 +421,5 @@
 
 </body>
 </html>
+
+

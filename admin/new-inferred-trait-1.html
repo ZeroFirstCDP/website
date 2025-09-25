@@ -142,7 +142,7 @@
                     <h2 class="text-xl font-semibold text-gray-800 text-center">Step 1: Select the type of trait to create</h2>
                     <p class="text-gray-600 mt-2 text-center">Each type of computed trait serves a different purpose. Choose the one that best fits your needs.</p>
                     
-                    <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
                         <!-- Event Counter Card -->
                         <div id="event-counter-card" class="trait-card border border-gray-200 rounded-lg p-6 transition-all cursor-pointer bg-white">
                             <div class="flex items-start space-x-4">
@@ -165,6 +165,19 @@
                                 <div>
                                     <h3 class="text-lg font-bold text-gray-800">Most Frequent</h3>
                                     <p class="mt-2 text-sm text-gray-600">A most frequent user-level computed trait will return the most common value for an event property. In the case of a tie, the first alphabetical value is returned.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Unique List Card -->
+                        <div id="unique-list-card" class="trait-card border border-gray-200 rounded-lg p-6 transition-all cursor-pointer bg-white">
+                             <div class="flex items-start space-x-4">
+                                <div class="bg-purple-100 rounded-lg p-3">
+                                    <i data-lucide="list-checks" class="w-6 h-6 text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-800">Unique list</h3>
+                                    <p class="mt-2 text-sm text-gray-600">Unique list computed traits will output a list of unique values in alphabetical order for an event property. This is helpful to understand the different types of content that a customer or users in an account have interacted with.</p>
                                 </div>
                             </div>
                         </div>
@@ -228,4 +241,5 @@
 
 </body>
 </html>
+
 

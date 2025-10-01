@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Library Test</title>
+    <script>
+      // Create the analytics object
+      var analytics = window.analytics = window.analytics || [];
+      
+      // Prevent loading the snippet twice
+      if (!analytics.initialize) {
+        if (analytics.invoked) {
+          window.console && console.error && console.error("Analytics snippet included twice.");
+        } else {
+          analytics.invoked = true;
+          
+          // Define the methods we want to expose
+          analytics.methods = ["track", "identify", "page"];
+          
+          // Create a factory function for each method
+          analytics.factory = function(method) {
+            return function() {
+              var args = Array.prototype.slice.call(arguments);
+              
+              // If analytics is initialized and it's the actual Analytics instance (not our queue)
+              if (window.analytics && window.analytics.constructor && window.analytics.constructor.name === 'Analytics') {
+                return window.analytics[method].apply(window.analytics, args);
+              }
+              
+              // Otherwise, queue the call
+              if (window.ZFAnalytics && typeof window.ZFAnalytics.queueCall === 'function') {
+                window.ZFAnalytics.queueCall(method, args);
+              } else {
+                // If ZFAnalytics is not loaded yet, store in the queue
+                analytics.push([method, args]);
+              }
+              
+              return analytics;
+            };
+          };
+          
+          // Create the methods
+          for (var i = 0; i < analytics.methods.length; i++) {
+            var method = analytics.methods[i];
+            analytics[method] = analytics.factory(method);
+          }
+          
+          // Load the analytics script
+          analytics.load = function(writeKey) {
+            var script = document.createElement("script");
+            script.type = "text/javascript";
+            script.async = true;
+            //script.src = "dist/zf-analytics.dev.js";
+            script.src = "https://cdn.zerofirst.io/zf-analytics.min.js";
+            
+            // Initialize analytics after script loads
+            script.onload = function() {
+              // Get the init function from the global ZFAnalytics object
+              var init = window.ZFAnalytics.init;
+              var isInitialized = window.ZFAnalytics.isInitialized;
+              
+              if (typeof init === 'function') {
+                // Only initialize if not already initialized
+                if (!isInitialized || !isInitialized()) {
+                  init({
+                    writeKey: writeKey,
+                    debug: true, // Set to true for development
+                    baseUrl: 'https://events-gateway-wvhezqbhpa-lm.a.run.app'
+                  });
+                }
+              } else {
+                console.error('Analytics initialization failed: init function not found');
+              }
+            };
+            
+            var firstScript = document.getElementsByTagName("script")[0];
+            firstScript.parentNode.insertBefore(script, firstScript);
+          };
+          
+          // Load the script with your write key
+          analytics.load("cVbypnIrmEzq3ZxG5puCf2rkeMQ61zcC");
+        }
+      }
+    </script>
+</head>
+<body>
+    <h1>Analytics Library Test</h1>
+    <div id="output"></div>
+    
+    <div style="margin: 20px 0;">
+        <h2>Test Analytics Events</h2>
+        <p>Open browser console to see debug output and network requests.</p>
+        
+        <div style="margin: 10px 0;">
+            <button onclick="testIdentify()">Test Identify</button>
+            <button onclick="testTrack()">Test Track</button>
+            <button onclick="testPage()">Test Page</button>
+            <button onclick="testAll()">Test All Events</button>
+        </div>
+        
+        <div style="margin: 10px 0;">
+            <button onclick="testAnonymousIdentify()">Test Anonymous Identify</button>
+            <button onclick="testMultipleEvents()">Test Multiple Events</button>
+            <button onclick="testWithComplexData()">Test Complex Data</button>
+        </div>
+        
+        <div style="margin: 10px 0;">
+            <button onclick="testCampaignContext()">Test Campaign Context</button>
+            <button onclick="simulateUtmUrls()">Simulate UTM URLs</button>
+        </div>
+        
+        <div style="margin: 10px 0;">
+            <button onclick="getTritonToken()">Get Triton Token</button>
+            <button onclick="enableDebug()">Enable Debug Mode</button>
+            <button onclick="clearConsole()">Clear Console</button>
+        </div>
+    </div>
+
+    <!-- New Device Test Section -->
+    <div style="margin: 30px 0; padding: 15px; border: 1px solid #ccc; border-radius: 6px; background:#fafafa;">
+        <h2>Device & Context Tests</h2>
+        <p>Use these buttons to inspect the automatically collected device & network context.</p>
+        <div style="margin:10px 0;">
+            <button onclick="showDeviceInfo()">Show Device Info (No Network)</button>
+            <button onclick="showNetworkInfo()">Show Network Info (No Network)</button>
+            <button onclick="showScreenInfo()">Show Screen Info</button>
+            <button onclick="sendDeviceTestEvent()">Send Device Test Event</button>
+            <button onclick="logFullContext()">Log Full Context (No Network)</button>
+        </div>
+        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <div style="flex:1; min-width:260px;">
+                <h4 style="margin:4px 0;">Device</h4>
+                <div id="device-info-display" style="white-space:pre; font-family:monospace; background:#fff; padding:10px; border:1px solid #ddd; max-height:250px; overflow:auto;"></div>
+            </div>
+            <div style="flex:1; min-width:260px;">
+                <h4 style="margin:4px 0;">Network</h4>
+                <div id="network-info-display" style="white-space:pre; font-family:monospace; background:#fff; padding:10px; border:1px solid #ddd; max-height:250px; overflow:auto;"></div>
+            </div>
+            <div style="flex:1; min-width:260px;">
+                <h4 style="margin:4px 0;">Screen</h4>
+                <div id="screen-info-display" style="white-space:pre; font-family:monospace; background:#fff; padding:10px; border:1px solid #ddd; max-height:250px; overflow:auto;"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="event-log" style="margin-top: 20px; padding: 10px; background: #f5f5f5; border-radius: 4px; max-height: 300px; overflow-y: auto;">
+        <h3>Event Log:</h3>
+        <div id="log-content"></div>
+    </div>
+
+    <script>
+        let eventCounter = 0;
+        
+        function logEvent(type, data) {
+            eventCounter++;
+            const logContent = document.getElementById('log-content');
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = document.createElement('div');
+            logEntry.style.margin = '5px 0';
+            logEntry.style.padding = '5px';
+            logEntry.style.backgroundColor = '#fff';
+            logEntry.style.borderRadius = '3px';
+            logEntry.innerHTML = `<strong>${eventCounter}. [${timestamp}] ${type}:</strong> ${JSON.stringify(data, null, 2)}`;
+            logContent.appendChild(logEntry);
+            logContent.scrollTop = logContent.scrollHeight;
+        }
+
+        function testIdentify() {
+            console.log('Testing identify...');
+            const userData = {
+                name: 'John Doe',
+                email: 'john@example.com',
+                age: 30,
+                plan: 'premium'
+            };
+            analytics.identify('user-123', userData);
+            logEvent('IDENTIFY', { userId: 'user-123', traits: userData });
+        }
+
+        function testTrack() {
+            console.log('Testing track...');
+            const eventData = {
+                buttonName: 'Test Track Button',
+                page: 'Test Page',
+                timestamp: new Date().toISOString(),
+                value: 42
+            };
+            analytics.track('Button Clicked', eventData);
+            logEvent('TRACK', { event: 'Button Clicked', properties: eventData });
+        }
+
+        function testPage() {
+            console.log('Testing page...');
+            const pageData = {
+                referrer: 'https://example.com',
+                utm_source: 'test',
+                utm_campaign: 'analytics-test',
+                section: 'testing'
+            };
+            analytics.page('Test Page View', pageData);
+            logEvent('PAGE', { name: 'Test Page View', properties: pageData });
+        }
+
+        function testAnonymousIdentify() {
+            console.log('Testing anonymous identify...');
+            const anonymousTraits = {
+                anonymousId: 'anon-visitor-456',
+                source: 'organic',
+                firstVisit: true
+            };
+            analytics.identify(anonymousTraits);
+            logEvent('IDENTIFY (ANONYMOUS)', { traits: anonymousTraits });
+        }
+
+        function testMultipleEvents() {
+            console.log('Testing multiple events in sequence...');
+            
+            // Simulate a user journey
+            setTimeout(() => {
+                analytics.page('Homepage', { referrer: 'google.com' });
+                logEvent('PAGE', { name: 'Homepage', properties: { referrer: 'google.com' } });
+            }, 100);
+            
+            setTimeout(() => {
+                analytics.track('View Product', { productId: 'prod-123', category: 'electronics' });
+                logEvent('TRACK', { event: 'View Product', properties: { productId: 'prod-123', category: 'electronics' } });
+            }, 200);
+            
+            setTimeout(() => {
+                analytics.identify('user-456', { name: 'Jane Smith', email: 'jane@example.com' });
+                logEvent('IDENTIFY', { userId: 'user-456', traits: { name: 'Jane Smith', email: 'jane@example.com' } });
+            }, 300);
+            
+            setTimeout(() => {
+                analytics.track('Add to Cart', { productId: 'prod-123', quantity: 2, price: 99.99 });
+                logEvent('TRACK', { event: 'Add to Cart', properties: { productId: 'prod-123', quantity: 2, price: 99.99 } });
+            }, 400);
+        }
+
+        function testWithComplexData() {
+            console.log('Testing with complex data structures...');
+            
+            const complexUserData = {
+                name: 'Complex User',
+                email: 'complex@example.com',
+                preferences: {
+                    theme: 'dark',
+                    language: 'en-US',
+                    notifications: {
+                        email: true,
+                        push: false,
+                        sms: true
+                    }
+                },
+                tags: ['premium', 'early-adopter', 'beta-tester'],
+                metadata: {
+                    signupDate: '2024-01-15',
+                    lastLogin: new Date().toISOString(),
+                    loginCount: 42
+                }
+            };
+            
+            analytics.identify('complex-user-789', complexUserData);
+            logEvent('IDENTIFY (COMPLEX)', { userId: 'complex-user-789', traits: complexUserData });
+            
+            const complexEventData = {
+                category: 'ecommerce',
+                action: 'purchase',
+                products: [
+                    { id: 'prod-1', name: 'Product 1', price: 29.99, quantity: 2 },
+                    { id: 'prod-2', name: 'Product 2', price: 49.99, quantity: 1 }
+                ],
+                order: {
+                    id: 'order-123',
+                    total: 109.97,
+                    currency: 'USD',
+                    discount: 0,
+                    tax: 10.99
+                },
+                payment: {
+                    method: 'credit_card',
+                    provider: 'stripe'
+                }
+            };
+            
+            analytics.track('Purchase Completed', complexEventData);
+            logEvent('TRACK (COMPLEX)', { event: 'Purchase Completed', properties: complexEventData });
+        }
+
+        function testAll() {
+            console.log('Testing all event types...');
+            testIdentify();
+            setTimeout(testTrack, 500);
+            setTimeout(testPage, 1000);
+        }
+
+        function enableDebug() {
+            console.log('Debug mode should be enabled via initialization. Reloading page...');
+            // Modify the debug setting in the script
+            const currentUrl = window.location.href;
+            if (!currentUrl.includes('debug=true')) {
+                window.location.href = currentUrl + (currentUrl.includes('?') ? '&' : '?') + 'debug=true';
+            }
+        }
+
+        function clearConsole() {
+            console.clear();
+            document.getElementById('log-content').innerHTML = '';
+            eventCounter = 0;
+        }
+
+        function testCampaignContext() {
+            console.log('Testing campaign context from current URL...');
+            
+            // Log current URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const utmParams = {};
+            for (const [key, value] of urlParams) {
+                if (key.startsWith('utm_')) {
+                    utmParams[key] = value;
+                }
+            }
+            
+            if (Object.keys(utmParams).length === 0) {
+                logEvent('CAMPAIGN TEST', { 
+                    note: 'No UTM parameters found in current URL', 
+                    currentUrl: window.location.href,
+                    suggestion: 'Use "Simulate UTM URLs" button to test with campaign parameters'
+                });
+            } else {
+                logEvent('CAMPAIGN TEST', { 
+                    note: 'UTM parameters found in current URL', 
+                    utmParams: utmParams,
+                    currentUrl: window.location.href
+                });
+            }
+            
+            // Test all event types to see campaign context
+            analytics.identify('campaign-test-user', { 
+                name: 'Campaign Test User',
+                testType: 'campaign-context'
+            });
+            logEvent('IDENTIFY (CAMPAIGN)', { userId: 'campaign-test-user', note: 'Check console/network for campaign context' });
+            
+            setTimeout(() => {
+                analytics.track('Campaign Context Test', { 
+                    testType: 'campaign-tracking',
+                    timestamp: new Date().toISOString()
+                });
+                logEvent('TRACK (CAMPAIGN)', { event: 'Campaign Context Test', note: 'Check console/network for campaign context' });
+            }, 500);
+            
+            setTimeout(() => {
+                analytics.page('Campaign Test Page', { 
+                    testType: 'campaign-page-view'
+                });
+                logEvent('PAGE (CAMPAIGN)', { name: 'Campaign Test Page', note: 'Check console/network for campaign context' });
+            }, 1000);
+        }
+
+        function simulateUtmUrls() {
+            console.log('Simulating different UTM URL scenarios...');
+            
+            const testScenarios = [
+                {
+                    name: 'Email Campaign',
+                    params: '?utm_source=newsletter&utm_medium=email&utm_campaign=summer-sale&utm_content=header-cta'
+                },
+                {
+                    name: 'Google Ads',
+                    params: '?utm_source=google&utm_medium=cpc&utm_campaign=brand-keywords&utm_term=analytics%20library&utm_content=ad-variant-a'
+                },
+                {
+                    name: 'Social Media',
+                    params: '?utm_source=facebook&utm_medium=social&utm_campaign=product-launch&utm_content=video-ad'
+                },
+                {
+                    name: 'Referral Program',
+                    params: '?utm_source=referral&utm_medium=word-of-mouth&utm_campaign=customer-referral&utm_content=share-link'
+                },
+                {
+                    name: 'No UTM (Clean URL)',
+                    params: ''
+                }
+            ];
+            
+            let currentIndex = 0;
+            
+            function showNextScenario() {
+                if (currentIndex < testScenarios.length) {
+                    const scenario = testScenarios[currentIndex];
+                    const baseUrl = window.location.origin + window.location.pathname;
+                    const newUrl = baseUrl + scenario.params + (scenario.params ? '&debug=true' : '?debug=true');
+                    
+                    logEvent('URL SIMULATION', {
+                        scenario: scenario.name,
+                        newUrl: newUrl,
+                        note: `Will redirect to test ${scenario.name} in 3 seconds...`
+                    });
+                    
+                    setTimeout(() => {
+                        window.location.href = newUrl;
+                    }, 3000);
+                    
+                    currentIndex++;
+                } else {
+                    logEvent('URL SIMULATION', {
+                        note: 'All scenarios tested. Returning to clean URL...'
+                    });
+                    
+                    setTimeout(() => {
+                        const baseUrl = window.location.origin + window.location.pathname;
+                        window.location.href = baseUrl + '?debug=true';
+                    }, 3000);
+                }
+            }
+            
+            showNextScenario();
+        }
+
+        function getTritonToken() {
+            console.log('Attempting to get Triton Token...');
+            analytics.getTritonPartnerToken().then(token => {
+                if (token) {
+                    logEvent('TRITON TOKEN', { token: token });
+                    console.log('Successfully retrieved Triton Token:', token);
+                } else {
+                    logEvent('TRITON TOKEN', { note: 'empty token' });
+                    console.error('Failed to retrieve Triton Token');
+                }
+            }).catch(error => {
+                logEvent('TRITON TOKEN', { error: error.message });
+                console.error('Error retrieving Triton Token:', error);
+            });
+        }
+
+        // ===== Device & Context Test Helpers =====
+        function internalBuildTrackEvent() {
+            try {
+                if (window.analytics && window.analytics._eventFactory) {
+                    // Leverage internal event factory to build (but not send) an event with fresh context
+                    return window.analytics._eventFactory.track('Device Internal Probe', {});
+                }
+            } catch (e) {
+                console.warn('Unable to build internal event for context inspection:', e);
+            }
+            return null;
+        }
+
+        function showDeviceInfo() {
+            const ev = internalBuildTrackEvent();
+            if (!ev || !ev.context || !ev.context.device) {
+                logEvent('DEVICE INFO', { note: 'Device info not available yet. Make sure analytics initialized.' });
+                return;
+            }
+            const device = ev.context.device;
+            logEvent('DEVICE INFO', device);
+            const el = document.getElementById('device-info-display');
+            el.textContent = JSON.stringify(device, null, 2);
+        }
+
+        // New: showNetworkInfo
+        function showNetworkInfo() {
+            const ev = internalBuildTrackEvent();
+            if (!ev || !ev.context || !ev.context.network) {
+                logEvent('NETWORK INFO', { note: 'Network info not available yet. Make sure analytics initialized.' });
+                return;
+            }
+            logEvent('NETWORK INFO', ev.context.network);
+            const el = document.getElementById('network-info-display');
+            el.textContent = JSON.stringify(ev.context.network, null, 2);
+        }
+
+        // New: showScreenInfo
+        function showScreenInfo() {
+            const ev = internalBuildTrackEvent();
+            if (!ev || !ev.context || !ev.context.screen) {
+                logEvent('SCREEN INFO', { note: 'Screen info not available yet. Ensure analytics initialized.' });
+                return;
+            }
+            const screenInfo = ev.context.screen;
+            logEvent('SCREEN INFO', screenInfo);
+            const el = document.getElementById('screen-info-display');
+            if (el) el.textContent = JSON.stringify(screenInfo, null, 2);
+        }
+
+        function sendDeviceTestEvent() {
+            if (!window.analytics || typeof window.analytics.track !== 'function') {
+                logEvent('DEVICE TEST EVENT', { error: 'Analytics not initialized' });
+                return;
+            }
+            window.analytics.track('Device Test Event', { purpose: 'device-verification' });
+            logEvent('TRACK', { event: 'Device Test Event', properties: { purpose: 'device-verification' } });
+        }
+
+        function logFullContext() {
+            const ev = internalBuildTrackEvent();
+            if (!ev || !ev.context) {
+                logEvent('FULL CONTEXT', { note: 'Context not available yet.' });
+                return;
+            }
+            logEvent('FULL CONTEXT', ev.context);
+            const deviceEl = document.getElementById('device-info-display');
+            if (deviceEl) deviceEl.textContent = JSON.stringify(ev.context.device, null, 2);
+            const netEl = document.getElementById('network-info-display');
+            if (netEl) netEl.textContent = JSON.stringify(ev.context.network, null, 2);
+            const screenEl = document.getElementById('screen-info-display');
+            if (screenEl) screenEl.textContent = JSON.stringify(ev.context.screen, null, 2);
+        }
+
+        // Automatically show device info shortly after load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                showDeviceInfo();
+                showNetworkInfo();
+                showScreenInfo();
+            }, 1500);
+        });
+        // ===== End Device & Context Test Helpers =====
+
+        // Check if debug mode is requested via URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('debug') === 'true') {
+            // Update the debug setting in the analytics initialization
+            const scripts = document.getElementsByTagName('script');
+            for (let script of scripts) {
+                if (script.innerHTML.includes('debug: false')) {
+                    script.innerHTML = script.innerHTML.replace('debug: false', 'debug: true');
+                    break;
+                }
+            }
+        }
+
+        // Test some events on page load to verify context is working
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                console.log('Page loaded - testing initial events...');
+                analytics.page('Test Page Load');
+                logEvent('PAGE (AUTO)', { name: 'Test Page Load', note: 'Automatic page load event' });
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
